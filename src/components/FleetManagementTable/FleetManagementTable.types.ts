@@ -3,12 +3,19 @@
 export interface FleetManagementTableProps {
   className?: string;
 }
-// Fleet unit data with costs
-export interface FleetUnit {
+
+export interface Ship {
   name: string;
+  resources: {
+    metal: number;
+    crystal: number;
+    deuterium: number;
+  };
+  cargoCapacity: number;
+  speed: number;
+}
+
+export interface FleetUnit extends Ship {
   amount: number;
   ratio: number;
-  metal: number;
-  crystal: number;
-  deuterium: number;
 }

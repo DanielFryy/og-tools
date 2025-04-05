@@ -1,12 +1,12 @@
 import React from "react";
 
-import BaseShipCell from "./BaseShipCell";
+import RatioCell from "./RatioCell";
 import { render } from "setupTests";
 
-describe("BaseShipCell", () => {
+describe("RatioCell", () => {
   it("renders with default props", () => {
     render(
-      <BaseShipCell
+      <RatioCell
         baseShipName="test"
         ship={{
           resources: { crystal: 0, deuterium: 0, metal: 0 },

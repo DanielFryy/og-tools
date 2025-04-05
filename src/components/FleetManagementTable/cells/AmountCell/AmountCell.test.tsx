@@ -8,7 +8,14 @@ describe("AmountCell", () => {
     render(
       <AmountCell
         baseShipName="test"
-        fleetUnit={{ amount: 0, crystal: 0, deuterium: 0, metal: 0, name: "test", ratio: 0 }}
+        ship={{
+          resources: { crystal: 0, deuterium: 0, metal: 0 },
+          name: "test",
+          cargoCapacity: 0,
+          speed: 0,
+          amount: 0,
+          ratio: 0
+        }}
         onChange={() => {}}
       />
     );

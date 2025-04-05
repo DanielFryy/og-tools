@@ -1,13 +1,12 @@
 import React from "react";
 
-import BaseShipCell from "./BaseShipCell";
+import ResourceCell from "./ResourceCell";
 import { render } from "setupTests";
 
-describe("BaseShipCell", () => {
+describe("ResourceCell", () => {
   it("renders with default props", () => {
     render(
-      <BaseShipCell
-        baseShipName="test"
+      <ResourceCell
         ship={{
           resources: { crystal: 0, deuterium: 0, metal: 0 },
           name: "test",
@@ -16,7 +15,7 @@ describe("BaseShipCell", () => {
           amount: 0,
           ratio: 0
         }}
-        onChange={() => {}}
+        resourceType="metal"
       />
     );
   });

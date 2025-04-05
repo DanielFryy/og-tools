@@ -3,7 +3,7 @@ import { FleetUnit } from "../../FleetManagementTable.types";
 
 export interface BaseShipCellProps {
   className?: string;
-  fleetUnit: FleetUnit;
+  ship: FleetUnit;
   onChange: (value: string) => void;
-  baseShipName: string | null;
+  baseShipName: string | undefined;
 }

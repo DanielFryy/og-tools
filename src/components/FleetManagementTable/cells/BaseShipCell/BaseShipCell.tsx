@@ -2,8 +2,8 @@ import { BaseShipCellProps as Props } from "./BaseShipCell.types";
 import { TableCell } from "@/components/ui/table";
 
 const BaseShipCell = (props: Props) => {
-  const { fleetUnit, onChange, baseShipName } = props;
-  const { name } = fleetUnit;
+  const { ship, onChange, baseShipName } = props;
+  const { name } = ship;
   // Check if the current unit is the base ship
   const isBaseShip = name === baseShipName;
 
