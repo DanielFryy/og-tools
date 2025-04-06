@@ -14,7 +14,8 @@ describe("RatioCell", () => {
           cargoCapacity: 0,
           speed: 0,
           amount: 0,
-          ratio: 0
+          ratio: 0,
+          type: "civil"
         }}
         onChange={() => {}}
       />

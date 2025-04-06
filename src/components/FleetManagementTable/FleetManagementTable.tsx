@@ -3,7 +3,6 @@ import { twMerge } from "tailwind-merge";
 import { FleetManagementTableProps as Props } from "./FleetManagementTable.types";
 import AmountCell from "./cells/AmountCell/AmountCell";
 import BaseShipCell from "./cells/BaseShipCell/BaseShipCell";
-import RatioCell from "./cells/RatioCell/RatioCell";
 import ResourceCell from "./cells/ResourceCell/ResourceCell";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import useNumberFormatter from "@/hooks/useNumberFormatter";
@@ -12,7 +11,7 @@ import { useFleetStore } from "@/stores/fleet/fleet.store";
 const FleetManagementTable = (props: Props) => {
   const { className } = props;
   const formatNumber = useNumberFormatter();
-  const { fleetUnits, baseShip, setBaseShip, setAmount, setRatio } = useFleetStore();
+  const { fleetUnits, baseShip, setBaseShip, setAmount } = useFleetStore();
   const { name: baseShipName } = baseShip ?? {};
 
   const totals = fleetUnits.reduce(
@@ -38,8 +37,7 @@ const FleetManagementTable = (props: Props) => {
             <TableRow>
               <TableHead className="w-32 text-white font-semibold">Fleet</TableHead>
               <TableHead className="text-center text-white font-semibold">Base Ship</TableHead>
-              <TableHead className="text-right text-white font-semibold">Amount</TableHead>
-              <TableHead className="text-right text-white font-semibold">Ratio</TableHead>
+              <TableHead className="w-28 text-right text-white font-semibold">Amount</TableHead>
               <TableHead className="text-right text-white font-semibold">Metal</TableHead>
               <TableHead className="text-right text-white font-semibold">Crystal</TableHead>
               <TableHead className="text-right text-white font-semibold">Deuterium</TableHead>
@@ -54,7 +52,6 @@ const FleetManagementTable = (props: Props) => {
                   <TableCell className="font-medium text-slate-200">{name}</TableCell>
                   <BaseShipCell baseShipName={baseShipName} ship={ship} onChange={setBaseShip} />
                   <AmountCell baseShipName={baseShipName} ship={ship} onChange={setAmount} />
-                  <RatioCell baseShipName={baseShipName} ship={ship} onChange={setRatio} />
                   <ResourceCell ship={ship} resourceType="metal" />
                   <ResourceCell ship={ship} resourceType="crystal" />
                   <ResourceCell ship={ship} resourceType="deuterium" />
@@ -67,7 +64,6 @@ const FleetManagementTable = (props: Props) => {
               <TableCell className="font-bold text-white">Total</TableCell>
               <TableCell />
               <TableCell className="text-right font-bold text-white pr-3">{formatNumber(totals.amount)}</TableCell>
-              <TableCell />
               <TableCell className="text-right font-bold text-white">{formatNumber(totals.metal)}</TableCell>
               <TableCell className="text-right font-bold text-white">{formatNumber(totals.crystal)}</TableCell>
               <TableCell className="text-right font-bold text-white">{formatNumber(totals.deuterium)}</TableCell>

@@ -17,6 +17,7 @@ const AmountCell = (props: Props) => {
           min="0"
           inputMode="numeric"
           pattern="[0-9]*"
+          maxLength={9}
           value={amount}
           onChange={e => onChange(name, +e.target.value)}
           className="w-24 ml-auto text-right bg-slate-700 border-slate-600 text-white"
