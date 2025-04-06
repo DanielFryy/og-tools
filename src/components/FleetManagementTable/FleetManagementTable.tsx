@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 import { FleetManagementTableProps as Props } from "./FleetManagementTable.types";
 import AmountCell from "./cells/AmountCell/AmountCell";
 import BaseShipCell from "./cells/BaseShipCell/BaseShipCell";
+import PointsCell from "./cells/PointsCell/PointsCell";
 import ResourceCell from "./cells/ResourceCell/ResourceCell";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import useNumberFormatter from "@/hooks/useNumberFormatter";
@@ -41,6 +42,7 @@ const FleetManagementTable = (props: Props) => {
               <TableHead className="text-right text-white font-semibold">Metal</TableHead>
               <TableHead className="text-right text-white font-semibold">Crystal</TableHead>
               <TableHead className="text-right text-white font-semibold">Deuterium</TableHead>
+              <TableHead className="text-right text-white font-semibold">Points</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -55,6 +57,7 @@ const FleetManagementTable = (props: Props) => {
                   <ResourceCell ship={ship} resourceType="metal" />
                   <ResourceCell ship={ship} resourceType="crystal" />
                   <ResourceCell ship={ship} resourceType="deuterium" />
+                  <PointsCell ship={ship} />
                 </TableRow>
               );
             })}
@@ -67,6 +70,9 @@ const FleetManagementTable = (props: Props) => {
               <TableCell className="text-right font-bold text-white">{formatNumber(totals.metal)}</TableCell>
               <TableCell className="text-right font-bold text-white">{formatNumber(totals.crystal)}</TableCell>
               <TableCell className="text-right font-bold text-white">{formatNumber(totals.deuterium)}</TableCell>
+              <TableCell className="text-right font-bold text-white">
+                {formatNumber((totals.metal + totals.crystal + totals.deuterium) / 1_000)}
+              </TableCell>
             </TableRow>
           </TableFooter>
         </Table>
