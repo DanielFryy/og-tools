@@ -3,7 +3,6 @@ import { TableCell } from "@/components/ui/table";
 
 const BaseUnitCell = (props: Props) => {
   const { unit, onChange, baseUnitName } = props;
-  console.log({ baseUnitName });
 
   const { name } = unit;
   // Check if the current unit is the base unit

@@ -12,7 +12,6 @@ export const useDefenseStore = create<DefenseStore>((set, get) => ({
   setBaseUnit: unitName => {
     const { units, reset } = get();
     const baseUnit = units.find(unit => unit.name === unitName);
-    console.log({ baseUnit });
     if (!baseUnit) return;
     // // Calculate the new ship distribution
     reset();
