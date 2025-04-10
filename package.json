@@ -13,9 +13,12 @@
     "check-types": "tsc -b",
     "test": "vitest",
     "test:all": "vitest run",
+    "clean": "rm -rf node_modules",
+    "clean:build": "rm -rf dist",
     "prepare": "husky"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^12.5.0",
     "@radix-ui/react-dialog": "^1.1.7",
     "@radix-ui/react-label": "^2.1.3",
     "@radix-ui/react-select": "^2.1.7",
