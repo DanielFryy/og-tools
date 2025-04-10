@@ -1,5 +1,6 @@
 // This file contains the constants used throughout the application.
 import { Defense } from "@/types/Defense.types";
+import { PlayerClass } from "@/types/Global.types";
 import { Ship } from "@/types/Ship.types";
 
 // Ships
@@ -207,11 +208,30 @@ const allDefenses: Defense[] = [
   deathstar
 ] as const;
 
+// Player Classes
+const collector: PlayerClass = {
+  type: "Collector",
+  bonuses: []
+} as const;
+
+const general: PlayerClass = {
+  type: "General",
+  bonuses: []
+} as const;
+
+const discoverer: PlayerClass = {
+  type: "Discoverer",
+  bonuses: []
+} as const;
+
+const playerClasses: PlayerClass[] = [collector, general, discoverer] as const;
+
 export const CONSTANTS = {
   SHIPS: {
     COMBAT: combatShips,
     CIVIL: civilShips,
     ALL: allShips
   },
-  DEFENSES: allDefenses
+  DEFENSES: allDefenses,
+  PLAYER_CLASSES: playerClasses
 } as const;

@@ -2,7 +2,6 @@ import { create } from "zustand";
 
 import { DefenseStore } from "./defense.store.types";
 import { CONSTANTS } from "@/config/constants";
-// import { calculateUnitsDistribution } from "@/utils/global.utils";
 
 const { DEFENSES: UNITS } = CONSTANTS;
 
@@ -12,9 +11,7 @@ export const useDefenseStore = create<DefenseStore>((set, get) => ({
   setBaseUnit: unitName => {
     const { units, reset } = get();
     const baseUnit = units.find(unit => unit.name === unitName);
-    console.log({ baseUnit });
     if (!baseUnit) return;
-    // // Calculate the new ship distribution
     reset();
     set({ baseUnit });
   },

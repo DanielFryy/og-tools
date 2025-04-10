@@ -14,7 +14,7 @@ const ShipManagementTable = (props: Props) => {
       baseUnitName={baseUnitName}
       onBaseUnitChange={setBaseUnit}
       onAmountChange={setAmount}
-      title="Fleet Management"
+      title="Ships Management"
     />
   );
 };

@@ -20,7 +20,7 @@ const RatioCell = (props: Props) => {
           type="number"
           value={ratio}
           onChange={e => onChange?.(name, e.target.value)}
-          className="w-24 ml-auto text-right bg-slate-700 border-slate-600 text-white"
+          className="w-24 ml-auto text-right"
         />
       )}
     </TableCell>
