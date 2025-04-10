@@ -8,6 +8,7 @@ const DefenseManagementTable = (props: Props) => {
   const setBaseUnit = useDefenseStore(state => state.setBaseUnit);
   const setRatio = useDefenseStore(state => state.setRatio);
   const setAmount = useDefenseStore(state => state.setAmount);
+  const setEnabled = useDefenseStore(state => state.setEnabled);
 
   return (
     <UnitsManagementTable
@@ -16,6 +17,7 @@ const DefenseManagementTable = (props: Props) => {
       onBaseUnitChange={setBaseUnit}
       onAmountChange={setAmount}
       onRatioChange={setRatio}
+      onEnableChange={setEnabled}
       title="Defense Management"
       withRatio
     />

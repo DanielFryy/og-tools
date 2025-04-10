@@ -14,7 +14,8 @@ describe("ResourceCell", () => {
           speed: 0,
           amount: 0,
           ratio: 0,
-          type: "civil"
+          type: "civil",
+          enabled: false
         }}
         resourceType="metal"
       />

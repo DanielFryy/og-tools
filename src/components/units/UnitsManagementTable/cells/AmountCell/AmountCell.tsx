@@ -10,7 +10,7 @@ import { useGlobalsStore } from "@/stores/globals/globals.store";
 const AmountCell = (props: Props) => {
   const { className, unit, onChange, baseUnitName } = props;
   const formatNumber = useNumberFormatter();
-  const { name, amount } = unit;
+  const { name, amount, enabled } = unit;
   const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
   const { type: playerClassType } = selectedPlayerClass ?? {};
   const isBaseShip = name === baseUnitName;
@@ -40,7 +40,7 @@ const AmountCell = (props: Props) => {
       ) : disabled ? (
         <span className="text-slate-500 font-medium">-</span>
       ) : (
-        <span>{formatNumber(amount)}</span>
+        <span className={enabled ? "" : "text-muted-foreground"}>{formatNumber(amount)}</span>
       )}
     </TableCell>
   );

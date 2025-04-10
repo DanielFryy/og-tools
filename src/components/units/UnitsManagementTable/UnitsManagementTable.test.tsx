@@ -11,6 +11,7 @@ describe("UnitsManagementTable", () => {
         baseUnitName="test"
         onAmountChange={() => {}}
         onBaseUnitChange={() => {}}
+        onEnableChange={() => {}}
         title="test"
       />
     );

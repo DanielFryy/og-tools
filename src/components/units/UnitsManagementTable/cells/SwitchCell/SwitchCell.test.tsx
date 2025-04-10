@@ -1,13 +1,14 @@
 import React from "react";
 
-import RatioCell from "./RatioCell";
+import SwitchCell from "./SwitchCell";
 import { render } from "setupTests";
 
-describe("RatioCell", () => {
+describe("SwitchCell", () => {
   it("renders with default props", () => {
     render(
-      <RatioCell
+      <SwitchCell
         baseUnitName="test"
+        onChange={() => {}}
         unit={{
           cost: { crystal: 0, deuterium: 0, metal: 0 },
           name: "test",
@@ -18,7 +19,6 @@ describe("RatioCell", () => {
           type: "civil",
           enabled: false
         }}
-        onChange={() => {}}
       />
     );
   });

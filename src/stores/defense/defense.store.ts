@@ -8,6 +8,15 @@ export const useDefenseStore = create<DefenseStore>()(
   persist(
     (set, get) => ({
       ...initialState,
+      setEnabled: unitName => {
+        const { units } = get();
+        const updatedUnits = units.map(unit => {
+          const { name, enabled } = unit;
+          if (name !== unitName) return unit;
+          return { ...unit, enabled: !enabled };
+        });
+        set({ units: updatedUnits });
+      },
       setBaseUnit: unitName => {
         const { units, reset } = get();
         const baseUnit = units.find(unit => unit.name === unitName);
