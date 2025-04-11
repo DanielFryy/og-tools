@@ -5,12 +5,17 @@ import { initialState } from "./globals.store.helpers";
 import { GlobalsStore } from "./globals.store.types";
 import { CONSTANTS } from "@/config/constants";
 
+const { PLAYER_CLASSES } = CONSTANTS;
+
 export const useGlobalsStore = create<GlobalsStore>()(
   persist(
     (set, get) => ({
-      selectedPlayerClass: null,
+      ...initialState,
+      setSidebarOpen: value => {
+        set({ sidebarOpen: value });
+      },
       setSelectedPlayerClass: playerClassType => {
-        const playerClass = CONSTANTS.PLAYER_CLASSES.find(playerClass => playerClass.type === playerClassType);
+        const playerClass = PLAYER_CLASSES.find(playerClass => playerClass.type === playerClassType);
         if (!playerClass) return;
         set({ selectedPlayerClass: playerClass });
       },

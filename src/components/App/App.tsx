@@ -8,10 +8,12 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import DefenseManagementTable from "@/components/units/DefenseManagementTable/DefenseManagementTable";
 import ShipManagementTable from "@/components/units/ShipManagementTable/ShipManagementTable";
+import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const App = (props: Props) => {
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const sidebarOpen = useGlobalsStore(state => state.sidebarOpen);
+  const setSidebarOpen = useGlobalsStore(state => state.setSidebarOpen);
 
   return (
     <SidebarProvider defaultOpen={sidebarOpen} open={sidebarOpen} onOpenChange={setSidebarOpen}>
