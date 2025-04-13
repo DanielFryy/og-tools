@@ -13,7 +13,7 @@ const RatioCell = (props: Props) => {
     const value = e.target.value.replace(/[^0-9.]/g, ""); // Remove non-numeric and non-decimal characters
     const parts = value.split(".");
     if (parts.length <= 4 && parts[0].length <= 5 && (!parts[1] || parts[1].length <= 4)) {
-      onChange?.(name, value ?? "0");
+      onChange?.(name, parseFloat(value) ?? 0);
     }
   };
 

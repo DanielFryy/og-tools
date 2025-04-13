@@ -8,7 +8,7 @@ import "./styles/index.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem storageKey="theme">
       <App />
     </ThemeProvider>
   </StrictMode>

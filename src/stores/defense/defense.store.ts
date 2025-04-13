@@ -29,7 +29,6 @@ export const useDefenseStore = create<DefenseStore>()(
           const { units, baseUnit } = state;
           if (!baseUnit) return state;
           const { amount: baseUnitAmount } = baseUnit;
-          // Calculate the new unit distribution
           const updatedUnits = units.map(unit => {
             if (unit.name !== unitName) return unit;
             return { ...unit, amount: Math.floor(baseUnitAmount * +ratio), ratio };
