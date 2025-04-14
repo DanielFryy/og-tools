@@ -6,9 +6,10 @@ export interface UnitsManagementTableProps {
   className?: string;
   units: EnhancedShip[] | EnhancedDefense[];
   baseUnitName: string | undefined;
+  onEnableChange: (unitName: string) => void;
   onBaseUnitChange: (unitName: string) => void;
   onAmountChange: (unitName: string, amount: number) => void;
-  onRatioChange?: (unitName: string, ratio: string) => void;
+  onRatioChange?: (unitName: string, ratio: number) => void;
   title: string;
   withRatio?: boolean;
 }

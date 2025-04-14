@@ -3,6 +3,9 @@ import { render as rtlRender } from "@testing-library/react";
 import { renderHook as rtlRenderHook } from "@testing-library/react";
 import { RenderOptions as RTLRenderOptions } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
+import { BrowserRouter, Route, Routes } from "react-router";
+
+import { SidebarProvider } from "./components/ui/sidebar";
 
 export interface RenderOptions extends Omit<RTLRenderOptions, "queries"> {
   // Initial route for the default browser history
@@ -17,7 +20,15 @@ export interface WrapperProps {
 export const Wrapper = (props: WrapperProps) => {
   const { children } = props;
 
-  return children;
+  return (
+    <SidebarProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={children} />
+        </Routes>
+      </BrowserRouter>
+    </SidebarProvider>
+  );
 };
 
 export const render = (ui: ReactElement, options: RenderOptions = {}) => {

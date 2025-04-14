@@ -1,13 +1,28 @@
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+
 import { AppProps as Props } from "./App.types";
-import DefenseManagementTable from "../units/DefenseManagementTable/DefenseManagementTable";
-import ShipManagementTable from "../units/ShipManagementTable/ShipManagementTable";
+import { navItems } from "../Sidebar/Sidebar.helpers";
+import AppLayout from "@/components/AppLayout/AppLayout";
+import NotFoundPage from "@/components/pages/NotFoundPage/NotFoundPage";
+import Providers from "@/providers/Providers/Providers";
 
 const App = (props: Props) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh p-4 bg-slate-950 sm:p-20 font-[family-name:var(--font-geist-sans)] gap-4">
-      <ShipManagementTable />
-      <DefenseManagementTable />
-    </div>
+    <Providers>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route index element={<Navigate replace to="/ships" />} />
+            {navItems.map(item => {
+              const { route, page: Page } = item;
+              return <Route path={route} element={<Page />} />;
+            })}
+            <Route path="/404" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate replace to="/404" />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Providers>
   );
 };
 

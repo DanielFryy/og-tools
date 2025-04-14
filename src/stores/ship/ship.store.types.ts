@@ -1,16 +1,6 @@
 // ShipStore types and interfaces
-import { Ship } from "@/types/Ship.types";
+import { EnhancedUnit, UnitStore } from "@/types/Stores.types";
 
-export interface EnhancedShip extends Ship {
-  amount: number;
-  ratio: number;
-}
+export type EnhancedShip = EnhancedUnit<"ship">;
 
-export type ShipStore = {
-  units: EnhancedShip[];
-  baseUnit: EnhancedShip | null;
-  setBaseUnit: (unitName: string) => void;
-  setRatio: (unitName: string, ratio: number) => void;
-  setAmount: (unitName: string, amount: number) => void;
-  reset: () => void;
-};
+export type ShipStore = UnitStore<EnhancedShip>;

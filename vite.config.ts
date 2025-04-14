@@ -5,7 +5,7 @@ import type { ViteUserConfig } from "vitest/config";
 
 const config: ViteUserConfig = {
   plugins: [react(), tailwindcss(), tsconfigPaths()],
-  test: { globals: true, environment: "jsdom", setupFiles: "./src/setupTests.tsx" }
+  test: { globals: true, environment: "jsdom", setupFiles: ["./src/setupTestBeforeEnv.ts", "./src/setupTests.tsx"] }
 };
 
 export default config;

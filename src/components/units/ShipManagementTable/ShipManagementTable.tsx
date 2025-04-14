@@ -7,6 +7,7 @@ const ShipManagementTable = (props: Props) => {
   const baseUnitName = useShipStore(state => state.baseUnit?.name);
   const setBaseUnit = useShipStore(state => state.setBaseUnit);
   const setAmount = useShipStore(state => state.setAmount);
+  const setEnabled = useShipStore(state => state.setEnabled);
 
   return (
     <UnitsManagementTable
@@ -14,7 +15,8 @@ const ShipManagementTable = (props: Props) => {
       baseUnitName={baseUnitName}
       onBaseUnitChange={setBaseUnit}
       onAmountChange={setAmount}
-      title="Fleet Management"
+      onEnableChange={setEnabled}
+      title="Ships Management"
     />
   );
 };
