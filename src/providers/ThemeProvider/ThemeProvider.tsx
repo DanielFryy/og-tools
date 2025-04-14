@@ -5,7 +5,11 @@ import { ThemeProviderProps as Props } from "./ThemeProvider.types";
 const ThemeProvider = (props: Props) => {
   const { children, ...rest } = props;
 
-  return <NextThemesProvider {...rest}>{children}</NextThemesProvider>;
+  return (
+    <NextThemesProvider attribute="class" defaultTheme="dark" enableSystem storageKey="theme" {...rest}>
+      {children}
+    </NextThemesProvider>
+  );
 };
 
 export default ThemeProvider;

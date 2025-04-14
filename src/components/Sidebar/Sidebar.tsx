@@ -1,3 +1,4 @@
+import { NavLink } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 import { navItems } from "./Sidebar.helpers";
@@ -13,7 +14,9 @@ const Sidebar = (props: Props) => {
     <SidebarUI collapsible="icon" className={twMerge("Sidebar", className)}>
       <SidebarHeader className="group-data-[collapsible=icon]:hidden transition-opacity">
         <div className="flex h-16 items-center px-4">
-          <span className="text-lg font-semibold">OG-Tools</span>
+          <NavLink to="/">
+            <span className="text-lg font-semibold">OG-Tools</span>
+          </NavLink>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -22,16 +25,23 @@ const Sidebar = (props: Props) => {
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map(item => {
-                const { label, icon: Icon, active, soon } = item;
+                const { label, icon: Icon, soon, route } = item;
 
                 return (
                   <SidebarMenuItem key={label}>
-                    <SidebarMenuButton asChild isActive={active} tooltip={label} disabled={soon}>
-                      <a href="#" className="flex items-center">
-                        <Icon className="mr-2 h-4 w-4" />
-                        <span>{label}</span>
-                      </a>
-                    </SidebarMenuButton>
+                    <NavLink to={route} className={twMerge("flex items-center", soon ? "pointer-events-none" : "")}>
+                      {({ isActive }) => (
+                        <SidebarMenuButton
+                          isActive={isActive}
+                          tooltip={label}
+                          disabled={soon}
+                          className="cursor-pointer"
+                        >
+                          <Icon className="mr-2 h-4 w-4" />
+                          <span>{label}</span>
+                        </SidebarMenuButton>
+                      )}
+                    </NavLink>
                   </SidebarMenuItem>
                 );
               })}

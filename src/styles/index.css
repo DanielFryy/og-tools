@@ -153,3 +153,12 @@ input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
+
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+}

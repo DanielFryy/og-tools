@@ -8,6 +8,7 @@ export interface SidebarProps {
 export interface NavItem {
   icon: ElementType;
   label: string;
+  route: string;
   soon?: boolean;
-  active?: boolean;
+  page: ElementType;
 }
