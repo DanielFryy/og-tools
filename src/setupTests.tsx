@@ -5,7 +5,7 @@ import { RenderOptions as RTLRenderOptions } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-import { SidebarProvider } from "./components/ui/sidebar";
+import Providers from "./providers/Providers/Providers";
 
 export interface RenderOptions extends Omit<RTLRenderOptions, "queries"> {
   // Initial route for the default browser history
@@ -21,13 +21,13 @@ export const Wrapper = (props: WrapperProps) => {
   const { children } = props;
 
   return (
-    <SidebarProvider>
+    <Providers>
       <BrowserRouter>
         <Routes>
           <Route element={children} />
         </Routes>
       </BrowserRouter>
-    </SidebarProvider>
+    </Providers>
   );
 };
 
