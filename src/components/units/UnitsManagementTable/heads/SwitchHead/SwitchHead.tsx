@@ -18,7 +18,7 @@ const SwitchHead = (props: Props) => {
               <Info className="h-4 w-4 text-muted-foreground cursor-help" />
             </TooltipTrigger>
             <TooltipContent>
-              <p>Toggle to include or exclude ships from calculations</p>
+              <p>Toggle to include or exclude units from calculations</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
