@@ -1,5 +1,6 @@
+"use client";
+
 import { useState } from "react";
-import { Outlet } from "react-router";
 import { twMerge } from "tailwind-merge";
 
 import { AppLayoutProps as Props } from "./AppLayout.types";
@@ -10,6 +11,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import { SidebarInset, useSidebar } from "@/components/ui/sidebar";
 
 const AppLayout = (props: Props) => {
+  const { children } = props;
   const [settingsOpen, setSettingsOpen] = useState(false);
   const { open } = useSidebar();
 
@@ -25,7 +27,7 @@ const AppLayout = (props: Props) => {
               open ? "max-w-[calc(100svw-var(--sidebar-width))]" : "max-w-[calc(100svw-var(--sidebar-width-icon))]"
             )}
           >
-            <Outlet />
+            {children}
           </main>
           <Footer />
         </SidebarInset>

@@ -1,3 +1,5 @@
+"use client";
+
 import { ProvidersProps as Props } from "./Providers.types";
 import SidebarProvider from "../SidebarProvider/SidebarProvider";
 import ThemeProvider from "../ThemeProvider/ThemeProvider";

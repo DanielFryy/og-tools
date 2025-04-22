@@ -1,4 +1,5 @@
-import { NavLink } from "react-router";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
 import { navItems } from "./Sidebar.helpers";
@@ -9,14 +10,15 @@ import { SidebarMenuItem, SidebarRail } from "@/components/ui/sidebar";
 
 const Sidebar = (props: Props) => {
   const { className } = props;
+  const pathname = usePathname();
 
   return (
     <SidebarUI collapsible="icon" className={twMerge("Sidebar", className)}>
       <SidebarHeader className="group-data-[collapsible=icon]:hidden transition-opacity">
         <div className="flex h-16 items-center px-4">
-          <NavLink to="/">
+          <Link href="/">
             <span className="text-lg font-semibold">OG-Tools</span>
-          </NavLink>
+          </Link>
         </div>
       </SidebarHeader>
       <SidebarContent>
@@ -29,19 +31,15 @@ const Sidebar = (props: Props) => {
 
                 return (
                   <SidebarMenuItem key={label}>
-                    <NavLink to={route} className={twMerge("flex items-center", soon ? "pointer-events-none" : "")}>
-                      {({ isActive }) => (
-                        <SidebarMenuButton
-                          isActive={isActive}
-                          tooltip={label}
-                          disabled={soon}
-                          className="cursor-pointer"
-                        >
-                          <Icon className="mr-2 h-4 w-4" />
-                          <span>{label}</span>
-                        </SidebarMenuButton>
-                      )}
-                    </NavLink>
+                    <SidebarMenuButton isActive={pathname === route} tooltip={label} asChild>
+                      <Link
+                        href={route}
+                        className={twMerge("flex items-center", soon ? "pointer-events-none opacity-50" : "")}
+                      >
+                        <Icon className="mr-2 h-4 w-4" />
+                        <span>{label}</span>
+                      </Link>
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 );
               })}

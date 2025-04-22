@@ -8,7 +8,7 @@ const UnderConstructionPage = (props: Props) => {
   const { className, structure } = props;
 
   return (
-    <div className={twMerge("UnderConstructionPage h-full max-h-full flex flex-col", className)}>
+    <div className={twMerge("UnderConstructionPage flex-1 flex items-center justify-center flex-col", className)}>
       <div className="container flex flex-col items-center justify-center gap-6 p-4 flex-1">
         <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-muted">
           <Construction className="h-12 w-12 text-muted-foreground" />

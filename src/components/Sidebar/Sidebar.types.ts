@@ -1,6 +1,5 @@
 // Sidebar component types and interfaces
 import { type LucideIcon } from "lucide-react";
-import { ElementType } from "react";
 
 export interface SidebarProps {
   className?: string;
@@ -11,5 +10,4 @@ export interface NavItem {
   label: string;
   route: string;
   soon?: boolean;
-  page: ElementType;
 }

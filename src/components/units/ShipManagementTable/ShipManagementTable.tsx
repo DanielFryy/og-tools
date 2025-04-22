@@ -1,3 +1,5 @@
+"use client";
+
 import { ShipManagementTableProps as Props } from "./ShipManagementTable.types";
 import UnitsManagementTable from "../UnitsManagementTable/UnitsManagementTable";
 import { useShipStore } from "@/stores/ship/ship.store";

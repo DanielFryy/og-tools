@@ -1,10 +1,10 @@
 import React from "react";
 
-import ShipsPage from "./ShipsPage";
+import HomePage from "./page";
 import { render } from "setupTests";
 
-describe("ShipsPage", () => {
+describe("HomePage", () => {
   it("renders with default props", () => {
-    render(<ShipsPage />);
+    render(<HomePage />);
   });
 });

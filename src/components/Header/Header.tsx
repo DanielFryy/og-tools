@@ -1,5 +1,5 @@
 import { Settings, PanelLeft, PanelRightClose } from "lucide-react";
-import { NavLink } from "react-router";
+import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 import { HeaderProps as Props } from "./Header.types";
@@ -31,7 +31,7 @@ const Header = (props: Props) => {
           {open ? <PanelLeft className="h-5 w-5" /> : <PanelRightClose className="h-5 w-5" />}
         </Button>
         <h1 className="text-xl font-bold">
-          <NavLink to="/">OG-Tools</NavLink>
+          <Link href="/">OG-Tools</Link>
         </h1>
       </div>
       <div className="flex items-center gap-2">

@@ -5,6 +5,6 @@ import { render } from "setupTests";
 
 describe("AppLayout", () => {
   it("renders with default props", () => {
-    render(<AppLayout />);
+    render(<AppLayout children={null} />);
   });
 });

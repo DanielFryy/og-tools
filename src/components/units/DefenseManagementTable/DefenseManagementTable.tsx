@@ -1,3 +1,5 @@
+"use client";
+
 import { DefenseManagementTableProps as Props } from "./DefenseManagementTable.types";
 import UnitsManagementTable from "../UnitsManagementTable/UnitsManagementTable";
 import { useDefenseStore } from "@/stores/defense/defense.store";
