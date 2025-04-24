@@ -4,7 +4,7 @@ import FallbackNavigation from "@/components/FallbackNavigation/FallbackNavigati
 
 const NotFoundPage = () => {
   return (
-    <div className="UnderConstructionPage flex-1 flex items-center justify-center flex-col">
+    <div className="UnderConstructionPage flex-1 flex items-center justify-center flex-col h-fit min-h-full">
       <div className="container flex flex-col items-center justify-center gap-6 p-4 flex-1">
         <div className="relative flex h-24 w-24 items-center justify-center rounded-full bg-muted">
           <AlertCircle className="h-12 w-12 text-muted-foreground" />

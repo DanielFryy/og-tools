@@ -8,7 +8,7 @@ import useNumberFormatter from "@/hooks/useNumberFormatter";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const AmountCell = (props: Props) => {
-  const { className, unit, onChange, baseUnitName } = props;
+  const { className, unit, onChange, baseUnitName, isFree } = props;
   const formatNumber = useNumberFormatter();
   const { name, amount, enabled } = unit;
   const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
@@ -23,20 +23,28 @@ const AmountCell = (props: Props) => {
     if (value.length <= 9) onChange(name, +value);
   };
 
+  const inputNode = (
+    <Input
+      min={0}
+      inputMode="numeric"
+      pattern="\d{0,9}"
+      maxLength={9}
+      max={999_999_999}
+      type="number"
+      value={amount}
+      onChange={changeHandler}
+      className="w-24 ml-auto text-right"
+    />
+  );
+
+  if (isFree) {
+    return <TableCell className={twMerge("text-right", className)}>{inputNode}</TableCell>;
+  }
+
   return (
     <TableCell className={twMerge("text-right", isBaseShip ? "" : "pr-3", className)}>
       {isBaseShip ? (
-        <Input
-          min={0}
-          inputMode="numeric"
-          pattern="\d{0,9}"
-          maxLength={9}
-          max={999_999_999}
-          type="number"
-          value={amount}
-          onChange={changeHandler}
-          className="w-24 ml-auto text-right"
-        />
+        inputNode
       ) : disabled ? (
         <span className="text-slate-500 font-medium">-</span>
       ) : (

@@ -4,7 +4,8 @@ import { EnhancedShip } from "@/stores/ship/ship.store.types";
 
 export interface AmountCellProps {
   className?: string;
-  unit: EnhancedShip | EnhancedDefense;
+  unit: Omit<EnhancedShip | EnhancedDefense, "ratio">;
   onChange: (fleetName: string, value: number) => void;
   baseUnitName: string | undefined;
+  isFree?: boolean;
 }

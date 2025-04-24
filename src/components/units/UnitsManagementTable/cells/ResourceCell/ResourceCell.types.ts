@@ -4,6 +4,7 @@ import { EnhancedShip } from "@/stores/ship/ship.store.types";
 
 export interface ResourceCellProps {
   className?: string;
-  unit: EnhancedShip | EnhancedDefense;
+  unit: Omit<EnhancedShip | EnhancedDefense, "ratio">;
   resourceType: "metal" | "crystal" | "deuterium";
+  isFree?: boolean;
 }

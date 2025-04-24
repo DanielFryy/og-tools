@@ -13,8 +13,8 @@ import useNumberFormatter from "@/hooks/useNumberFormatter";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const UnitsManagementTable = (props: Props) => {
-  const { className, units, baseUnitName, onBaseUnitChange, onAmountChange, onRatioChange, title, withRatio } = props;
-  const { onEnableChange } = props;
+  const { className, units, baseUnitName, onBaseUnitChange, onAmountChange, onRatioChange, title } = props;
+  const { onEnableChange, isFree } = props;
   const formatNumber = useNumberFormatter();
   const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
   const { type: playerClassType } = selectedPlayerClass ?? {};
@@ -47,10 +47,10 @@ const UnitsManagementTable = (props: Props) => {
           <TableHeader>
             <TableRow>
               <TableHead className="w-32 font-semibold">Unit</TableHead>
-              <SwitchHead />
-              <TableHead className="text-center font-semibold">Base Unit</TableHead>
+              {onEnableChange ? <SwitchHead /> : null}
+              {onBaseUnitChange ? <TableHead className="text-center font-semibold">Base Unit</TableHead> : null}
               <TableHead className="w-28 text-right font-semibold">Amount</TableHead>
-              {withRatio ? <TableHead className="text-center font-semibold">Ratio</TableHead> : null}
+              {onRatioChange ? <TableHead className="text-center font-semibold">Ratio</TableHead> : null}
               <TableHead className="text-right font-semibold">Metal</TableHead>
               <TableHead className="text-right font-semibold">Crystal</TableHead>
               <TableHead className="text-right font-semibold">Deuterium</TableHead>
@@ -60,6 +60,7 @@ const UnitsManagementTable = (props: Props) => {
           <TableBody>
             {units.map((unit, index) => {
               const { name, enabled } = unit;
+              const hasRatio = "ratio" in unit;
 
               return (
                 <TableRow
@@ -69,14 +70,20 @@ const UnitsManagementTable = (props: Props) => {
                   <TableCell className={twMerge("font-medium", enabled ? "" : "text-muted-foreground")}>
                     {name}
                   </TableCell>
-                  <SwitchCell baseUnitName={baseUnitName} unit={unit} onChange={onEnableChange} />
-                  <BaseUnitCell baseUnitName={baseUnitName} unit={unit} onChange={onBaseUnitChange} />
-                  <AmountCell baseUnitName={baseUnitName} unit={unit} onChange={onAmountChange} />
-                  {withRatio ? <RatioCell baseUnitName={baseUnitName} unit={unit} onChange={onRatioChange} /> : null}
-                  <ResourceCell unit={unit} resourceType="metal" />
-                  <ResourceCell unit={unit} resourceType="crystal" />
-                  <ResourceCell unit={unit} resourceType="deuterium" />
-                  <PointsCell unit={unit} />
+                  {onEnableChange ? (
+                    <SwitchCell baseUnitName={baseUnitName} unit={unit} onChange={onEnableChange} />
+                  ) : null}
+                  {onBaseUnitChange ? (
+                    <BaseUnitCell baseUnitName={baseUnitName} unit={unit} onChange={onBaseUnitChange} />
+                  ) : null}
+                  <AmountCell baseUnitName={baseUnitName} unit={unit} onChange={onAmountChange} isFree={isFree} />
+                  {onRatioChange && hasRatio ? (
+                    <RatioCell baseUnitName={baseUnitName} unit={unit} onChange={onRatioChange} />
+                  ) : null}
+                  <ResourceCell unit={unit} resourceType="metal" isFree={isFree} />
+                  <ResourceCell unit={unit} resourceType="crystal" isFree={isFree} />
+                  <ResourceCell unit={unit} resourceType="deuterium" isFree={isFree} />
+                  <PointsCell unit={unit} isFree={isFree} />
                 </TableRow>
               );
             })}
@@ -84,10 +91,10 @@ const UnitsManagementTable = (props: Props) => {
           <TableFooter>
             <TableRow>
               <TableCell className="font-bold">Total</TableCell>
-              <TableCell />
-              <TableCell />
+              {onEnableChange ? <TableCell /> : null}
+              {onBaseUnitChange ? <TableCell /> : null}
               <TableCell className="text-right font-bold pr-3">{formatNumber(totals.amount)}</TableCell>
-              {withRatio ? <TableCell /> : null}
+              {onRatioChange ? <TableCell /> : null}
               <TableCell className="text-right font-bold">{formatNumber(totals.metal)}</TableCell>
               <TableCell className="text-right font-bold">{formatNumber(totals.crystal)}</TableCell>
               <TableCell className="text-right font-bold">{formatNumber(totals.deuterium)}</TableCell>

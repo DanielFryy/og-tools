@@ -4,7 +4,7 @@ import useNumberFormatter from "@/hooks/useNumberFormatter";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const ResourceCell = (props: Props) => {
-  const { unit, resourceType } = props;
+  const { unit, resourceType, isFree } = props;
   const { name, cost, amount, enabled } = unit;
   const resource = cost[resourceType];
   const formatNumber = useNumberFormatter();
@@ -17,7 +17,9 @@ const ResourceCell = (props: Props) => {
 
   return (
     <TableCell className="text-right">
-      {disabled ? (
+      {isFree ? (
+        <span>{formatNumber(calculatedResource)}</span>
+      ) : disabled ? (
         <span className="text-slate-500 font-medium">-</span>
       ) : (
         <span className={enabled ? "" : "text-muted-foreground"}>{formatNumber(calculatedResource)}</span>

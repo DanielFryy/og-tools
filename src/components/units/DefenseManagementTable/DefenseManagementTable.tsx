@@ -21,7 +21,6 @@ const DefenseManagementTable = (props: Props) => {
       onRatioChange={setRatio}
       onEnableChange={setEnabled}
       title="Defense Management"
-      withRatio
     />
   );
 };

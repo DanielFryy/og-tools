@@ -4,7 +4,7 @@ import { EnhancedShip } from "@/stores/ship/ship.store.types";
 
 export interface SwitchCellProps {
   className?: string;
-  unit: EnhancedShip | EnhancedDefense;
+  unit: Omit<EnhancedShip | EnhancedDefense, "ratio">;
   onChange: (unitName: string) => void;
   baseUnitName: string | undefined;
 }

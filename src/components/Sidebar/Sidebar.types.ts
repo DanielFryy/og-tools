@@ -6,8 +6,9 @@ export interface SidebarProps {
 }
 
 export interface NavItem {
-  icon: LucideIcon;
+  icon?: LucideIcon;
   label: string;
   route: string;
   soon?: boolean;
+  subRoutes?: NavItem[];
 }

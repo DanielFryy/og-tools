@@ -4,7 +4,18 @@ import { Shield, Satellite, Recycle, Rocket } from "lucide-react";
 import { NavItem } from "./Sidebar.types";
 
 export const navItems: NavItem[] = [
-  { icon: Rocket, label: "Ships", route: "/ships", soon: false },
+  {
+    icon: Rocket,
+    label: "Ships",
+    route: "/ships",
+    soon: false,
+    subRoutes: [
+      { label: "Manual", route: "/ships/manual" },
+      { label: "Cost match", route: "/ships/cost-match" },
+      { label: "Ratio", route: "/ships/ratio", soon: true },
+      { label: "Percent", route: "/ships/percent", soon: true }
+    ]
+  },
   { icon: Shield, label: "Defenses", route: "/defenses", soon: false },
   { icon: Recycle, label: "Recyclers", route: "/recyclers", soon: true },
   { icon: Satellite, label: "Solar Satellites", route: "/solar-satellites", soon: true }
