@@ -1,4 +1,4 @@
-import { Rocket, Calculator, Table, Database } from "lucide-react";
+import { Rocket, Calculator, Table, Database, Percent, Proportions } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -22,7 +22,7 @@ const ShipsPage = () => {
           </p>
         </div>
       </section>
-      <section className="w-full py-12 max-w-[120rem] md:py-24 flex px-4 md:px-6 gap-8 justify-evenly">
+      <section className="w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 gap-8 grid grid-cols-1 @4xl/main:grid-cols-2 @7xl/main:grid-cols-3 @8xl/main:grid-cols-4 justify-items-center">
         <Card
           title="Manual Calculator"
           description="A flexible calculator where you can freely input ship quantities and see the total resource costs. Perfect for planning custom fleet compositions without predefined ratios."
@@ -36,6 +36,22 @@ const ShipsPage = () => {
           link="/ships/cost-match"
           icon={Database}
           className="max-w-96 min-w-96"
+        />
+        <Card
+          title="Ratio Calculator"
+          description="Pick a base ship and define the ratio for each ship type. The calculator will compute the required quantities to maintain your specified ratios, making it easy to design proportionally balanced fleets."
+          link="/ships/ratio"
+          icon={Proportions}
+          className="max-w-96 min-w-96"
+          soon
+        />
+        <Card
+          title="Percent Calculator"
+          description="Choose a base ship and assign a percentage to each ship type. The calculator distributes the fleet according to your chosen percentages, helping you achieve precise resource allocation across your ships."
+          link="/ships/percent"
+          icon={Percent}
+          className="max-w-96 min-w-96"
+          soon
         />
       </section>
       <section className="flex-1 flex gap-4 justify-evenly w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 bg-muted/80 rounded">

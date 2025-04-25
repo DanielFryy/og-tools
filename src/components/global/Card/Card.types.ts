@@ -7,4 +7,5 @@ export interface CardProps {
   title: string;
   description: string;
   link: string;
+  soon?: boolean;
 }

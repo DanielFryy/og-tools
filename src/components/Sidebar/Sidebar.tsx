@@ -4,6 +4,7 @@ import { twMerge } from "tailwind-merge";
 
 import { navItems } from "./Sidebar.helpers";
 import { SidebarProps as Props } from "./Sidebar.types";
+import Soon from "@/components/global/Soon/Soon";
 import { Sidebar as SidebarUI, SidebarContent, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
 import { SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSubButton } from "@/components/ui/sidebar";
 import { SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton } from "@/components/ui/sidebar";
@@ -39,6 +40,7 @@ const Sidebar = (props: Props) => {
                       >
                         {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
                         <span>{label}</span>
+                        {soon ? <Soon className="ml-auto" /> : null}
                       </Link>
                     </SidebarMenuButton>
                     <SidebarMenuSub>
@@ -54,6 +56,7 @@ const Sidebar = (props: Props) => {
                               >
                                 {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
                                 <span>{label}</span>
+                                {soon ? <Soon className="ml-auto" /> : null}
                               </Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>

@@ -142,6 +142,22 @@
   }
 }
 
+/* Animated gradient utility class */
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 3s ease-in-out infinite;
+}
+
 /* Remove the increment/decrement arrows for number type input */
 /* Chrome, Safari, Edge, Opera */
 input[type="number"]::-webkit-inner-spin-button,

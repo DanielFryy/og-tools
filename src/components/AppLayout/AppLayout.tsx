@@ -23,7 +23,7 @@ const AppLayout = (props: Props) => {
           <Header onSettingsClick={() => setSettingsOpen(true)} />
           <main
             className={twMerge(
-              "flex-1 p-4 md:p-6 flex overflow-auto",
+              "flex-1 p-4 md:p-6 flex overflow-auto @container/main",
               open ? "max-w-[calc(100svw-var(--sidebar-width))]" : "max-w-[calc(100svw-var(--sidebar-width-icon))]"
             )}
           >

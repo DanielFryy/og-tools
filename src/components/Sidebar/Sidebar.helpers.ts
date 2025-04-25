@@ -16,7 +16,18 @@ export const navItems: NavItem[] = [
       { label: "Percent", route: "/ships/percent", soon: true }
     ]
   },
-  { icon: Shield, label: "Defenses", route: "/defenses", soon: false },
+  {
+    icon: Shield,
+    label: "Defenses",
+    route: "/defenses",
+    soon: false,
+    subRoutes: [
+      { label: "Manual", route: "/defenses/manual" },
+      { label: "Cost match", route: "/defenses/cost-match", soon: true },
+      { label: "Ratio", route: "/defenses/ratio" },
+      { label: "Percent", route: "/defenses/percent", soon: true }
+    ]
+  },
   { icon: Recycle, label: "Recyclers", route: "/recyclers", soon: true },
   { icon: Satellite, label: "Solar Satellites", route: "/solar-satellites", soon: true }
 ];
