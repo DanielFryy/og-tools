@@ -25,14 +25,16 @@ const UnitsManagementTable = (props: Props) => {
       const isPathfinder = name === "Pathfinder";
       const cantBuildReaper = isReaper && playerClassType !== "General";
       const cantBuildPathfinder = isPathfinder && playerClassType !== "Discoverer";
-      if (cantBuildReaper || cantBuildPathfinder || !enabled) return acc;
-
-      return {
+      const res = {
         amount: acc.amount + unitAmount,
         metal: acc.metal + cost.metal * unitAmount,
         crystal: acc.crystal + cost.crystal * unitAmount,
         deuterium: acc.deuterium + cost.deuterium * unitAmount
       };
+      if (isFree) return res;
+      if (cantBuildReaper || cantBuildPathfinder || !enabled) return acc;
+
+      return res;
     },
     { amount: 0, metal: 0, crystal: 0, deuterium: 0 }
   );
