@@ -54,7 +54,7 @@ const DefensesPage = () => {
           soon
         />
       </section>
-      <section className="flex-1 flex gap-4 justify-evenly w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 bg-muted/80 rounded">
+      <section className="flex-1 flex flex-col @4xl:flex-row gap-4 justify-evenly w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 bg-muted/80 rounded">
         <div className="flex flex-col justify-center gap-4">
           <div className="space-y-2">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Why Use Our Defense Calculators?</h2>
