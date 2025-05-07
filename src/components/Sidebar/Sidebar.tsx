@@ -1,18 +1,19 @@
+import { Calculator, Star } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 
+import FavoriteItem from "./FavoriteItem/FavoriteItem";
+import MenuItem from "./MenuItem/MenuItem";
 import { navItems } from "./Sidebar.helpers";
 import { SidebarProps as Props } from "./Sidebar.types";
-import Soon from "@/components/global/Soon/Soon";
 import { Sidebar as SidebarUI, SidebarContent, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
-import { SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSubButton } from "@/components/ui/sidebar";
-import { SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton } from "@/components/ui/sidebar";
-import { SidebarMenuItem, SidebarRail } from "@/components/ui/sidebar";
+import { SidebarGroupLabel, SidebarHeader, SidebarMenu } from "@/components/ui/sidebar";
+import { SidebarRail } from "@/components/ui/sidebar";
+import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const Sidebar = (props: Props) => {
   const { className } = props;
-  const pathname = usePathname();
+  const favoriteRoutes = useGlobalsStore(state => state.favoriteRoutes);
 
   return (
     <SidebarUI collapsible="icon" className={twMerge("Sidebar", className)}>
@@ -25,47 +26,32 @@ const Sidebar = (props: Props) => {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Calculators</SidebarGroupLabel>
+          <SidebarGroupLabel className="flex items-center gap-2">
+            <Star className="h-3 w-3" height={12} width={12} />
+            <span>Favorites</span>
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map(item => {
-                const { label, icon: Icon, soon, route, subRoutes } = item;
-
-                return (
-                  <SidebarMenuItem key={label}>
-                    <SidebarMenuButton isActive={pathname === route} tooltip={label} asChild>
-                      <Link
-                        href={route}
-                        className={twMerge("flex items-center", soon ? "pointer-events-none opacity-50" : "")}
-                      >
-                        {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
-                        <span>{label}</span>
-                        {soon ? <Soon className="ml-auto" /> : null}
-                      </Link>
-                    </SidebarMenuButton>
-                    <SidebarMenuSub>
-                      {subRoutes?.map(item => {
-                        const { label, icon: Icon, soon, route } = item;
-
-                        return (
-                          <SidebarMenuSubItem key={label}>
-                            <SidebarMenuSubButton isActive={pathname === route} asChild>
-                              <Link
-                                href={route}
-                                className={twMerge("flex items-center", soon ? "pointer-events-none opacity-50" : "")}
-                              >
-                                {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
-                                <span>{label}</span>
-                                {soon ? <Soon className="ml-auto" /> : null}
-                              </Link>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        );
-                      })}
-                    </SidebarMenuSub>
-                  </SidebarMenuItem>
-                );
-              })}
+              {favoriteRoutes.length ? (
+                favoriteRoutes.map(favoriteRoute => <FavoriteItem key={favoriteRoute.route} item={favoriteRoute} />)
+              ) : (
+                <div className="ml-2">
+                  <span>No favorites yet</span>
+                </div>
+              )}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel className="flex items-center gap-2">
+            <Calculator className="h-3 w-3" height={12} width={12} />
+            <span>Calculators</span>
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {navItems.map(item => (
+                <MenuItem key={item.route} item={item} />
+              ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
