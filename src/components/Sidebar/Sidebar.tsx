@@ -1,4 +1,4 @@
-import { Calculator, Star } from "lucide-react";
+import { Ban, Calculator, Star } from "lucide-react";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -7,7 +7,8 @@ import MenuItem from "./MenuItem/MenuItem";
 import { navItems } from "./Sidebar.helpers";
 import { SidebarProps as Props } from "./Sidebar.types";
 import { Sidebar as SidebarUI, SidebarContent, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
-import { SidebarGroupLabel, SidebarHeader, SidebarMenu } from "@/components/ui/sidebar";
+import { SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
+import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { SidebarRail } from "@/components/ui/sidebar";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
@@ -35,9 +36,12 @@ const Sidebar = (props: Props) => {
               {favoriteRoutes.length ? (
                 favoriteRoutes.map(favoriteRoute => <FavoriteItem key={favoriteRoute.route} item={favoriteRoute} />)
               ) : (
-                <div className="ml-2">
-                  <span>No favorites yet</span>
-                </div>
+                <SidebarMenuItem>
+                  <SidebarMenuButton tooltip="No favorites">
+                    <Ban />
+                    <span>No favorites</span>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               )}
             </SidebarMenu>
           </SidebarGroupContent>
