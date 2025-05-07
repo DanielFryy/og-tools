@@ -13,7 +13,7 @@ import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const MenuItem = (props: Props) => {
   const { className, item } = props;
-  const { label: parentLabel, icon: ParentIcon, soon, route, subRoutes } = item;
+  const { label: parentLabel, icon: Icon, soon, route, subRoutes } = item;
   const pathname = usePathname();
   const setFavoriteRoute = useGlobalsStore(state => state.setFavoriteRoute);
 
@@ -21,7 +21,7 @@ const MenuItem = (props: Props) => {
     <SidebarMenuItem className={twMerge("MenuItem", className)}>
       <SidebarMenuButton isActive={pathname === route} tooltip={parentLabel} asChild>
         <Link href={route} className={twMerge("flex items-center", soon ? "pointer-events-none opacity-50" : "")}>
-          {ParentIcon ? <ParentIcon className="mr-2 h-4 w-4" /> : null}
+          {Icon ? <Icon className="h-4 w-4" /> : null}
           <span>{parentLabel}</span>
           {soon ? <Soon className="ml-auto" /> : null}
         </Link>
@@ -37,7 +37,7 @@ const MenuItem = (props: Props) => {
                   href={route}
                   className={twMerge("flex items-center", soon ? "pointer-events-none opacity-50" : "")}
                 >
-                  {Icon ? <Icon className="mr-2 h-4 w-4" /> : null}
+                  {Icon ? <Icon className="h-4 w-4" /> : null}
                   <span>{label}</span>
                   {soon ? <Soon className="ml-auto" /> : null}
                 </Link>
@@ -50,9 +50,7 @@ const MenuItem = (props: Props) => {
                     </SidebarMenuAction>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side="right" align="start">
-                    <DropdownMenuItem
-                      onClick={() => setFavoriteRoute({ label, route, parentLabel, parentIcon: ParentIcon })}
-                    >
+                    <DropdownMenuItem onClick={() => setFavoriteRoute({ label, route, parentLabel })}>
                       <Star />
                       <span>Set as favorite</span>
                     </DropdownMenuItem>

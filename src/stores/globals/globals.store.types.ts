@@ -1,6 +1,4 @@
 // GlobalsStore types and interfaces
-import { type LucideIcon } from "lucide-react";
-
 import { PlayerClass } from "@/types/Global.types";
 
 export interface GlobalsStore {
@@ -16,7 +14,6 @@ export interface GlobalsStore {
 
 export interface FavoriteRoute {
   parentLabel: string;
-  parentIcon: LucideIcon | undefined;
   label: string;
   route: string;
 }

@@ -1,4 +1,4 @@
-import { MoreHorizontal, StarOff } from "lucide-react";
+import { Rocket, Shield, Recycle, Satellite, MoreHorizontal, StarOff } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
@@ -11,7 +11,7 @@ import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const FavoriteItem = (props: Props) => {
   const { className, item } = props;
-  const { label, route, parentIcon: Icon, parentLabel } = item;
+  const { label, route, parentLabel } = item;
   const pathname = usePathname();
   const removeFavoriteRoute = useGlobalsStore(state => state.removeFavoriteRoute);
 
@@ -19,11 +19,26 @@ const FavoriteItem = (props: Props) => {
     removeFavoriteRoute(item);
   };
 
+  const renderIcon = () => {
+    switch (parentLabel) {
+      case "Ships":
+        return <Rocket />;
+      case "Defenses":
+        return <Shield />;
+      case "Recyclers":
+        return <Recycle />;
+      case "Solar Satellites":
+        return <Satellite />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <SidebarMenuItem className={twMerge("FavoriteItem group/favorite-item", className)}>
       <SidebarMenuButton isActive={pathname === route} tooltip={label} asChild>
         <Link href={route}>
-          {Icon ? <Icon className="mr-2 h-4 w-4" /> : <span>{parentLabel} / </span>}
+          {renderIcon()}
           <span>{label}</span>
         </Link>
       </SidebarMenuButton>
