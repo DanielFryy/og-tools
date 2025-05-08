@@ -8,4 +8,5 @@ export interface CardProps {
   description: string;
   link: string;
   soon?: boolean;
+  buttonText?: string;
 }

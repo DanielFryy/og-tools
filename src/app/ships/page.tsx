@@ -2,6 +2,7 @@ import { Rocket, Calculator, Table, Database, Percent, Proportions } from "lucid
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import BlueBox from "@/components/global/BlueBox/BlueBox";
 import Card from "@/components/global/Card/Card";
 import { Button } from "@/components/ui/button";
 
@@ -56,7 +57,7 @@ const ShipsPage = () => {
       </section>
       <section className="flex-1 flex flex-col @4xl:flex-row gap-4 justify-evenly w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 bg-muted/80 rounded">
         <div className="flex flex-col justify-center gap-4">
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Why Use Our Ship Calculators?</h2>
             <p className="max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               Our specialized calculators help you make informed decisions about your fleet composition
@@ -78,26 +79,23 @@ const ShipsPage = () => {
           </ul>
         </div>
         <div className="flex items-center justify-center">
-          <div className="relative h-[300px] w-full overflow-hidden rounded-lg bg-gradient-to-b from-blue-900 to-slate-900 p-4">
-            <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=600')] bg-cover bg-center opacity-10" />
-            <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-primary-foreground dark:text-primary">
-              <Rocket className="h-16 w-16 mb-4" />
-              <h3 className="text-2xl font-bold">Fleet Optimization</h3>
-              <p className="mt-2 text-lg">Build the perfect fleet for your gameplay style</p>
-              <div className="mt-6 flex gap-4">
-                <Link href="/ships/manual">
-                  <Button variant="secondary" className="z-10">
-                    Manual Calculator
-                  </Button>
-                </Link>
-                <Link href="/ships/cost-match">
-                  <Button variant="secondary" className="z-10">
-                    Cost Match Calculator
-                  </Button>
-                </Link>
-              </div>
+          <BlueBox>
+            <Rocket className="h-16 w-16 mb-4" />
+            <h3 className="text-2xl font-bold">Fleet Optimization</h3>
+            <p className="mt-2 text-lg">Build the perfect fleet for your gameplay style</p>
+            <div className="mt-6 flex gap-4">
+              <Link href="/ships/manual">
+                <Button variant="secondary" className="z-10">
+                  Manual Calculator
+                </Button>
+              </Link>
+              <Link href="/ships/cost-match">
+                <Button variant="secondary" className="z-10">
+                  Cost Match Calculator
+                </Button>
+              </Link>
             </div>
-          </div>
+          </BlueBox>
         </div>
       </section>
     </div>

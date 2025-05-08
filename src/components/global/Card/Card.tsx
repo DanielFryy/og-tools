@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card as CardUI, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Card = (props: Props) => {
-  const { className, icon: Icon, title, description, link, soon } = props;
+  const { className, icon: Icon, title, description, link, soon, buttonText = `Open ${title}` } = props;
 
   return (
     <CardUI className={twMerge("Card flex flex-col", className)}>
@@ -21,7 +21,7 @@ const Card = (props: Props) => {
       </CardContent>
       <CardFooter>
         <Button className={twMerge("w-full", !!soon ? "pointer-events-none opacity-50" : "")} disabled={!!soon} asChild>
-          <Link href={link}>Open {title}</Link>
+          <Link href={link}>{buttonText}</Link>
         </Button>
       </CardFooter>
     </CardUI>
