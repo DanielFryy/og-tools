@@ -2,9 +2,11 @@
 
 export interface Unit {
   name: string;
-  cost: {
-    metal: number;
-    crystal: number;
-    deuterium: number;
-  };
+  cost: UnitCost;
+}
+
+export interface UnitCost {
+  metal: number;
+  crystal: number;
+  deuterium: number;
 }

@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import AdSense from "@/components/AdSense/AdSense";
 import AppLayout from "@/components/AppLayout/AppLayout";
 import Providers from "@/providers/Providers/Providers";
+import { LayoutProps } from "@/types/App.types";
 
 import "./globals.css";
 
@@ -23,11 +24,8 @@ export const metadata: Metadata = {
   description: "Some kind of calculator for OGame game"
 };
 
-const RootLayout = ({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) => {
+const RootLayout = (props: LayoutProps) => {
+  const { children } = props;
   const isProduction = process.env.NODE_ENV === "production";
   const publisherId = process.env.NEXT_PUBLIC_ADSENSE_PUBLISHER_ID;
   const gtmId = process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID;

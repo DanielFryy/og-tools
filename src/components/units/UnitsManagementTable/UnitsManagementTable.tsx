@@ -10,34 +10,16 @@ import SwitchCell from "./cells/SwitchCell/SwitchCell";
 import SwitchHead from "./heads/SwitchHead/SwitchHead";
 import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import useNumberFormatter from "@/hooks/useNumberFormatter";
+import { calculateTotals } from "@/lib/utils";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const UnitsManagementTable = (props: Props) => {
   const { className, units, baseUnitName, onBaseUnitChange, onAmountChange, onRatioChange, title } = props;
-  const { onEnableChange, isFree } = props;
+  const { onEnableChange, isFree = false } = props;
   const formatNumber = useNumberFormatter();
   const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType } = selectedPlayerClass ?? {};
-  const totals = units.reduce(
-    (acc, unit) => {
-      const { name, amount: unitAmount, cost, enabled } = unit;
-      const isReaper = name === "Reaper";
-      const isPathfinder = name === "Pathfinder";
-      const cantBuildReaper = isReaper && playerClassType !== "General";
-      const cantBuildPathfinder = isPathfinder && playerClassType !== "Discoverer";
-      const res = {
-        amount: acc.amount + unitAmount,
-        metal: acc.metal + cost.metal * unitAmount,
-        crystal: acc.crystal + cost.crystal * unitAmount,
-        deuterium: acc.deuterium + cost.deuterium * unitAmount
-      };
-      if (isFree) return res;
-      if (cantBuildReaper || cantBuildPathfinder || !enabled) return acc;
-
-      return res;
-    },
-    { amount: 0, metal: 0, crystal: 0, deuterium: 0 }
-  );
+  const { type: playerClassType = "Collector" } = selectedPlayerClass ?? {};
+  const totals = calculateTotals(units, playerClassType, isFree);
 
   return (
     <div className={twMerge("UnitsManagementTable md:min-w-3xl rounded-md overflow-hidden border", className)}>
