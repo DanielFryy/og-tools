@@ -1,13 +1,14 @@
 import { Ban, Calculator, Star } from "lucide-react";
-import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
 import FavoriteItem from "./FavoriteItem/FavoriteItem";
 import MenuItem from "./MenuItem/MenuItem";
 import { navItems } from "./Sidebar.helpers";
 import { SidebarProps as Props } from "./Sidebar.types";
+import SidebarFooter from "./SidebarFooter/SidebarFooter";
+import SidebarHeader from "./SidebarHeader/SidebarHeader";
 import { Sidebar as SidebarUI, SidebarContent, SidebarGroup, SidebarGroupContent } from "@/components/ui/sidebar";
-import { SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
+import { SidebarGroupLabel, SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
 import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { SidebarRail } from "@/components/ui/sidebar";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
@@ -18,13 +19,7 @@ const Sidebar = (props: Props) => {
 
   return (
     <SidebarUI collapsible="icon" className={twMerge("Sidebar", className)}>
-      <SidebarHeader className="group-data-[collapsible=icon]:hidden transition-opacity">
-        <div className="flex h-16 items-center px-4">
-          <Link href="/">
-            <span className="text-lg font-semibold">OG-Tools</span>
-          </Link>
-        </div>
-      </SidebarHeader>
+      <SidebarHeader />
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="flex items-center gap-2">
@@ -60,6 +55,7 @@ const Sidebar = (props: Props) => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter />
       <SidebarRail />
     </SidebarUI>
   );
