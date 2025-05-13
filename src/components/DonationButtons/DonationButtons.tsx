@@ -58,7 +58,7 @@ const DonationButtons = (props: Props) => {
       <div className="group-data-[collapsible=icon]:hidden flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Heart className="h-4 w-4 text-rose-500" />
-          <span className="text-sm font-medium">Support OG-Tools</span>
+          <span className="text-sm font-medium text-sidebar-foreground/70">Support OG-Tools</span>
         </div>
         {showThankYou ? (
           <span className="text-xs text-green-600 animate-fade-in">Thank you for your support!</span>
