@@ -37,7 +37,7 @@ const HomePage = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <BlueBox className="min-w-96">
+          <BlueBox className="min-w-80">
             <Rocket className="h-16 w-16 mb-4" />
             <h3 className="text-2xl font-bold">Supported Server</h3>
             <p className="mt-2 text-lg">Undae (s199-us.ogame.gameforge.com)</p>
