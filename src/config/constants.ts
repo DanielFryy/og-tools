@@ -109,7 +109,7 @@ const colonyShip: Ship = {
   type: "civil"
 } as const;
 
-const recycler: Ship = {
+export const RECYCLER: Ship = {
   name: "Recycler",
   cost: { metal: 10_000, crystal: 6_000, deuterium: 2_000 },
   cargoCapacity: 20_000,
@@ -141,6 +141,9 @@ const crawler: Ship = {
   type: "civil"
 } as const;
 
+// Ships that can't be moved just like defenses
+const staticShips: Ship[] = [solarSatellite, crawler] as const;
+
 const combatShips: Ship[] = [
   lightFighter,
   heavyFighter,
@@ -158,7 +161,7 @@ const civilShips: Ship[] = [
   smallCargo,
   largeCargo,
   colonyShip,
-  recycler,
+  RECYCLER,
   espionageProbe,
   solarSatellite,
   crawler
@@ -228,6 +231,7 @@ const playerClasses: PlayerClass[] = [collector, general, discoverer] as const;
 
 export const CONSTANTS = {
   SHIPS: {
+    STATIC: staticShips,
     COMBAT: combatShips,
     CIVIL: civilShips,
     ALL: allShips

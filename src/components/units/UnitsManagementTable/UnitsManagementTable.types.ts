@@ -12,6 +12,6 @@ export interface UnitsManagementTableProps {
   onBaseUnitChange?: (unitName: string) => void;
   onAmountChange: (unitName: string, amount: number) => void;
   onRatioChange?: (unitName: string, ratio: number) => void;
-  title: string;
+  title?: string;
   isFree?: boolean;
 }

@@ -20,12 +20,15 @@ const UnitsManagementTable = (props: Props) => {
   const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
   const { type: playerClassType = "Collector" } = selectedPlayerClass ?? {};
   const totals = calculateTotals(units, playerClassType, isFree);
+  const totalPoints = (totals.metal + totals.crystal + totals.deuterium) / 1_000;
 
   return (
-    <div className={twMerge("UnitsManagementTable md:min-w-3xl rounded-md overflow-hidden border", className)}>
-      <div className="bg-muted p-4">
-        <h2 className="text-xl font-bold">{title}</h2>
-      </div>
+    <div className={twMerge("UnitsManagementTable rounded-md overflow-hidden border", className)}>
+      {title ? (
+        <div className="bg-muted p-4">
+          <h2 className="text-xl font-bold">{title}</h2>
+        </div>
+      ) : null}
       <div className="bg-background">
         <Table>
           <TableHeader>
@@ -33,8 +36,8 @@ const UnitsManagementTable = (props: Props) => {
               <TableHead className="w-32 font-semibold">Unit</TableHead>
               {onEnableChange ? <SwitchHead /> : null}
               {onBaseUnitChange ? <TableHead className="text-center font-semibold">Base Unit</TableHead> : null}
-              <TableHead className="w-28 text-right font-semibold">Amount</TableHead>
-              {onRatioChange ? <TableHead className="text-center font-semibold">Ratio</TableHead> : null}
+              <TableHead className="text-right font-semibold">Amount</TableHead>
+              {onRatioChange ? <TableHead className="text-right font-semibold">Ratio</TableHead> : null}
               <TableHead className="text-right font-semibold">Metal</TableHead>
               <TableHead className="text-right font-semibold">Crystal</TableHead>
               <TableHead className="text-right font-semibold">Deuterium</TableHead>
@@ -82,9 +85,7 @@ const UnitsManagementTable = (props: Props) => {
               <TableCell className="text-right font-bold">{formatNumber(totals.metal)}</TableCell>
               <TableCell className="text-right font-bold">{formatNumber(totals.crystal)}</TableCell>
               <TableCell className="text-right font-bold">{formatNumber(totals.deuterium)}</TableCell>
-              <TableCell className="text-right font-bold">
-                {formatNumber((totals.metal + totals.crystal + totals.deuterium) / 1_000)}
-              </TableCell>
+              <TableCell className="text-right font-bold">{formatNumber(totalPoints)}</TableCell>
             </TableRow>
           </TableFooter>
         </Table>

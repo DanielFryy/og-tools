@@ -28,6 +28,6 @@ export const navItems: NavItem[] = [
       { label: "Percent", route: "/defenses/percent", soon: true }
     ]
   },
-  { icon: Recycle, label: "Recyclers", route: "/recyclers", soon: true },
+  { icon: Recycle, label: "Recyclers", route: "/recyclers" },
   { icon: Satellite, label: "Solar Satellites", route: "/solar-satellites", soon: true }
 ];

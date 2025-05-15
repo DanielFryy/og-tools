@@ -33,7 +33,7 @@ const AmountCell = (props: Props) => {
       type="number"
       value={amount}
       onChange={changeHandler}
-      className="w-24 ml-auto text-right"
+      className="min-w-14 max-w-24 ml-auto text-right"
     />
   );
 

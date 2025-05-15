@@ -31,7 +31,7 @@ const RatioCell = (props: Props) => {
           step={0.01}
           value={ratio}
           onChange={changeHandler}
-          className="w-24 ml-auto text-right"
+          className="min-w-14 max-w-24 ml-auto text-right"
         />
       )}
     </TableCell>
