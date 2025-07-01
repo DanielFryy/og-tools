@@ -10,7 +10,10 @@ describe("BaseUnitCell", () => {
         baseUnitName="test"
         unit={{
           cost: { crystal: 0, deuterium: 0, metal: 0 },
-          name: "test"
+          name: "test",
+          shieldPower: 0,
+          structuralIntegrity: 0,
+          weaponPower: 0
         }}
         onChange={() => {}}
       />

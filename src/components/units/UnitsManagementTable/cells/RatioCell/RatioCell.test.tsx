@@ -16,7 +16,10 @@ describe("RatioCell", () => {
           amount: 0,
           ratio: 0,
           type: "civil",
-          enabled: false
+          enabled: false,
+          shieldPower: 0,
+          structuralIntegrity: 0,
+          weaponPower: 0
         }}
         onChange={() => {}}
       />

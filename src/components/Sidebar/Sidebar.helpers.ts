@@ -29,5 +29,6 @@ export const navItems: NavItem[] = [
     ]
   },
   { icon: Recycle, label: "Recyclers", route: "/recyclers" },
-  { icon: Satellite, label: "Solar Satellites", route: "/solar-satellites", soon: true }
+  { icon: Satellite, label: "Solar Satellites", route: "/solar-satellites", soon: true },
+  { icon: Rocket, label: "IPMs", route: "/ipms" }
 ];
