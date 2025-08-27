@@ -20,6 +20,7 @@ const CallToAction = (props: Props) => {
 
   const calculateIPMNeeded = () => {
     const ipmDamage = WP * (1 + weaponTechLevel / 10);
+    const marginError = 1; // Allow for a small margin of error in calculations
     const { ipmsRequired, ABMs } = units.reduce(
       (acc, unit) => {
         const { cost, amount } = unit;
@@ -33,7 +34,7 @@ const CallToAction = (props: Props) => {
       },
       { ipmsRequired: 0, ABMs: 0 }
     );
-    const totalIPMs = Math.ceil(ipmsRequired) + ABMs;
+    const totalIPMs = Math.ceil(ipmsRequired) + ABMs + marginError;
     setResult(totalIPMs);
   };
 
