@@ -1,5 +1,5 @@
 // Sidebar helper functions and data
-import { Shield, Satellite, Recycle, Rocket } from "lucide-react";
+import { Shield, Satellite, Recycle, Rocket, Zap } from "lucide-react";
 
 import { NavItem } from "./Sidebar.types";
 
@@ -30,5 +30,6 @@ export const navItems: NavItem[] = [
   },
   { icon: Recycle, label: "Recyclers", route: "/recyclers" },
   { icon: Satellite, label: "Solar Satellites", route: "/solar-satellites", soon: true },
-  { icon: Rocket, label: "IPMs", route: "/ipms" }
+  { icon: Rocket, label: "IPMs", route: "/ipms" },
+  { icon: Zap, label: "Energy", route: "/energy" }
 ];

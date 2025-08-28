@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const RecyclersPage = () => {
   return (
-    <main className="RecyclersPage flex-1 flex items-center justify-center h-fit min-h-full">
+    <div className="RecyclersPage flex-1 flex items-center justify-center h-fit min-h-full">
       <div className="flex flex-col gap-6 max-w-[120rem]">
         <div className="grid gap-6 @4xl/main:grid-cols-2">
           <StaticShipsTable />
@@ -19,7 +19,7 @@ const RecyclersPage = () => {
         </div>
         <RecyclerHelpPanel />
       </div>
-    </main>
+    </div>
   );
 };
 

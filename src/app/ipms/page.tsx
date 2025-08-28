@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 
 const IPMsPage = () => {
   return (
-    <main className=" IPMCalculatorPage flex-1 flex items-center justify-center h-fit min-h-full">
+    <div className="IPMCalculatorPage flex-1 flex items-center justify-center h-fit min-h-full">
       <div className="grid gap-6 @4xl/main:grid-cols-2 max-w-[120rem]">
         <div className="flex flex-col gap-6">
           <TechLevels />
@@ -31,7 +31,7 @@ const IPMsPage = () => {
           <Empty />
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

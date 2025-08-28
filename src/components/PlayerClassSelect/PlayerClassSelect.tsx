@@ -13,7 +13,7 @@ const PlayerClassSelect = (props: Props) => {
 
   return (
     <Select value={selectedPlayerClass?.type} onValueChange={setSelectedPlayerClass}>
-      <SelectTrigger className="w-40">
+      <SelectTrigger className="w-40" size="sm">
         <SelectValue placeholder="Select a class" />
       </SelectTrigger>
       <SelectContent className={className}>
