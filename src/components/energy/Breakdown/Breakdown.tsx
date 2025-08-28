@@ -24,7 +24,10 @@ const Breakdown = (props: Props) => {
   const commandingStaffBonus = useEnergyStore(state => state.commandingStaffBonus);
   const allianceBonus = useEnergyStore(state => state.allianceBonus);
   const [isOpen, setIsOpen] = useState(false);
-  const itemBonusValue = parseFloat(itemBonus);
+  const itemBonusValue = (() => {
+    const n = parseFloat(itemBonus);
+    return isNaN(n) ? 0 : n;
+  })();
   const disruptionChamberBonus = disruptionChamberLevel * 1.5;
   const lifeformBonus = lifeformTechBonus + highPerformanceTransformerLevel;
   const showAppliedBonuses =
@@ -59,14 +62,13 @@ const Breakdown = (props: Props) => {
                   30 x {fusionReactorLevel} x (1.05 + {energyTechLevel} x 0.01)^{fusionReactorLevel}
                 </div>
               </div>
-
               {showAppliedBonuses ? (
                 <div className="flex flex-col gap-2">
                   <div className="font-medium">Applied Bonuses:</div>
                   <div className="flex flex-col gap-1 text-muted-foreground">
                     {itemBonusValue > 0 ? (
                       <div>
-                        • Item Bonus: +{itemBonus}% = {(baseEnergy * (itemBonusValue / 100)).toLocaleString()}
+                        • Item Bonus: +{itemBonusValue}% = {(baseEnergy * (itemBonusValue / 100)).toLocaleString()}
                       </div>
                     ) : null}
                     {lifeformBonus > 0 ? (
@@ -81,10 +83,15 @@ const Breakdown = (props: Props) => {
                     {allianceBonus ? (
                       <div>• Alliance Bonus: +5% = {(baseEnergy * (5 / 100)).toLocaleString()}</div>
                     ) : null}
+                    {disruptionChamberBonus > 0 ? (
+                      <div>
+                        • Disruption Chamber: +{disruptionChamberBonus}% ={" "}
+                        {(baseEnergy * (disruptionChamberBonus / 100)).toLocaleString()}
+                      </div>
+                    ) : null}
                   </div>
                 </div>
               ) : null}
-
               <div className="pt-2 border-t">
                 <div className="font-medium">Result:</div>
                 <div className="text-muted-foreground">

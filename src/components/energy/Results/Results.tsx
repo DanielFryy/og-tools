@@ -11,6 +11,8 @@ const Results = (props: Props) => {
   const { className } = props;
   const baseEnergy = useEnergyStore(state => state.baseEnergy);
   const totalEnergy = useEnergyStore(state => state.totalEnergy);
+  const bonusEnergy = totalEnergy - baseEnergy;
+  const bonusPercentage = baseEnergy > 0 ? (bonusEnergy / baseEnergy) * 100 : 0;
 
   return (
     <Card className={twMerge("Results", className)}>
@@ -25,7 +27,7 @@ const Results = (props: Props) => {
             <span className="text-lg font-medium">Base Energy</span>
           </div>
           <div className="text-3xl font-bold text-primary">{baseEnergy.toLocaleString()}</div>
-          <div className="text-sm text-muted-foreground mt-1">Energy per hour</div>
+          <div className="text-sm text-muted-foreground mt-1">Raw energy</div>
         </div>
 
         <div className="text-center p-6 border rounded-lg bg-primary/10">
@@ -33,20 +35,21 @@ const Results = (props: Props) => {
             <Zap className="h-6 w-6 text-yellow-500" />
             <span className="text-lg font-medium">Total Energy</span>
           </div>
-          <div className="text-4xl font-bold text-primary">{Math.floor(totalEnergy).toLocaleString()}</div>
-          <div className="text-sm text-muted-foreground mt-1">Energy per hour (with bonuses)</div>
+          <div className="text-4xl font-bold text-primary" title={totalEnergy.toLocaleString()}>
+            {Math.floor(totalEnergy).toLocaleString()}
+          </div>
+          <div className="text-sm text-muted-foreground mt-1">Raw energy plus bonuses</div>
         </div>
-
-        {totalEnergy > baseEnergy && (
+        {totalEnergy > baseEnergy ? (
           <div className="flex flex-col gap-1 text-center p-4 border rounded-lg bg-green-50 dark:bg-green-950/20">
             <div className="text-lg font-medium text-green-700 dark:text-green-400">
-              Bonus Energy: +{(totalEnergy - baseEnergy).toLocaleString()}
+              Bonus Energy: +{bonusEnergy.toLocaleString()}
             </div>
             <div className="text-sm text-green-600 dark:text-green-500">
-              {(((totalEnergy - baseEnergy) / baseEnergy) * 100).toFixed(3)}% increase
+              {bonusPercentage > 0 ? `${bonusPercentage.toFixed(3)}% increase` : "—"}
             </div>
           </div>
-        )}
+        ) : null}
       </CardContent>
     </Card>
   );

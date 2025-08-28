@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronsUpDown } from "lucide-react";
-import { useState } from "react";
+import { useState, useId } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { InformationProps as Props } from "./Information.types";
@@ -12,6 +12,8 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 const Information = (props: Props) => {
   const { className } = props;
   const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
+  const toggleLabel = isOpen ? "Collapse information details" : "Expand information details";
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -22,13 +24,13 @@ const Information = (props: Props) => {
             <CardDescription>About fusion reactor energy production</CardDescription>
           </div>
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8">
+            <Button variant="ghost" size="icon" className="size-8" aria-controls={contentId} aria-expanded={isOpen}>
               <ChevronsUpDown />
-              <span className="sr-only">Toggle</span>
+              <span className="sr-only">{toggleLabel}</span>
             </Button>
           </CollapsibleTrigger>
         </CardHeader>
-        <CollapsibleContent>
+        <CollapsibleContent id={contentId}>
           <CardContent className="flex flex-col gap-3 text-sm">
             <div className="flex flex-col gap-1">
               <div className="font-medium">Fusion Reactor:</div>

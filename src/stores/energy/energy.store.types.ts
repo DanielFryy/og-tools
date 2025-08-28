@@ -8,7 +8,7 @@ export type EnergyStore = {
   energyTechLevel: number;
   disruptionChamberLevel: number;
   highPerformanceTransformerLevel: number;
-  itemBonus: string;
+  itemBonus: "0" | "20" | "40" | "60" | "80";
   lifeformTechBonus: number;
   engineerBonus: boolean;
   commandingStaffBonus: boolean;
@@ -17,7 +17,7 @@ export type EnergyStore = {
   setEnergyTechLevel: (level: number) => void;
   setDisruptionChamberLevel: (level: number) => void;
   setHighPerformanceTransformerLevel: (level: number) => void;
-  setItemBonus: (bonus: string) => void;
+  setItemBonus: (bonus: EnergyStore["itemBonus"]) => void;
   setLifeformTechBonus: (bonus: number) => void;
   setEngineerBonus: (enabled: boolean) => void;
   setCommandingStaffBonus: (enabled: boolean) => void;

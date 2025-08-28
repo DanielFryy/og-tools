@@ -1,107 +1,86 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { calculateBaseEnergy, calculateTotalEnergy, initialState } from "./energy.store.helpers";
+import { calculateBaseEnergy, calculateTotalEnergy, getCalculationParams, initialState } from "./energy.store.helpers";
 import { EnergyStore } from "./energy.store.types";
 
 export const useEnergyStore = create<EnergyStore>()(
   persist(
     (set, get) => ({
       ...initialState,
-      setFusionReactorLevel: (level: number) => {
-        const { energyTechLevel, itemBonus, lifeformTechBonus, engineerBonus, commandingStaffBonus } = get();
-        const { allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
+      setFusionReactorLevel: level => {
+        const { energyTechLevel } = get();
         const baseEnergy = calculateBaseEnergy(level, energyTechLevel);
-        const params1 = { baseEnergy, fusionReactorLevel: level, energyTechLevel, itemBonus, allianceBonus };
-        const params2 = { lifeformTechBonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+        const overrides = { fusionReactorLevel: level, baseEnergy };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ fusionReactorLevel: level, baseEnergy, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
-      setEnergyTechLevel: (level: number) => {
-        const { fusionReactorLevel, itemBonus, lifeformTechBonus, engineerBonus, commandingStaffBonus } = get();
-        const { allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
+      setEnergyTechLevel: level => {
+        const { fusionReactorLevel } = get();
         const baseEnergy = calculateBaseEnergy(fusionReactorLevel, level);
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel: level, itemBonus, allianceBonus };
-        const params2 = { lifeformTechBonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+        const overrides = { energyTechLevel: level, baseEnergy };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ energyTechLevel: level, baseEnergy, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
-      setDisruptionChamberLevel: (level: number) => {
-        const { fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus, engineerBonus } = get();
-        const { baseEnergy, commandingStaffBonus, allianceBonus, highPerformanceTransformerLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, allianceBonus };
-        const params2 = { lifeformTechBonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel: level };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+      setDisruptionChamberLevel: level => {
+        const overrides = { disruptionChamberLevel: level };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ disruptionChamberLevel: level, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
-      setHighPerformanceTransformerLevel: (level: number) => {
-        const { fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus, engineerBonus } = get();
-        const { baseEnergy, commandingStaffBonus, allianceBonus, disruptionChamberLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, allianceBonus };
-        const params2 = { lifeformTechBonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel: level };
+      setHighPerformanceTransformerLevel: level => {
+        const overrides = { highPerformanceTransformerLevel: level };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ highPerformanceTransformerLevel: level, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
-      setItemBonus: (bonus: string) => {
-        const { fusionReactorLevel, energyTechLevel, lifeformTechBonus, engineerBonus, commandingStaffBonus } = get();
-        const { baseEnergy, allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus: bonus, allianceBonus };
-        const params2 = { lifeformTechBonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+      setItemBonus: bonus => {
+        const overrides = { itemBonus: bonus };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ itemBonus: bonus, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
-      setLifeformTechBonus: (bonus: number) => {
-        const { fusionReactorLevel, energyTechLevel, itemBonus, engineerBonus, commandingStaffBonus } = get();
-        const { baseEnergy, allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, allianceBonus };
-        const params2 = { lifeformTechBonus: bonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+      setLifeformTechBonus: bonus => {
+        const overrides = { lifeformTechBonus: bonus };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ lifeformTechBonus: bonus, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
-      setEngineerBonus: (enabled: boolean) => {
-        const { fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus, commandingStaffBonus } = get();
-        const { baseEnergy, allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus };
-        const params2 = { engineerBonus: enabled, commandingStaffBonus, allianceBonus, disruptionChamberLevel };
+      setEngineerBonus: enabled => {
         if (enabled) {
-          const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+          const overrides = { engineerBonus: enabled };
+          const params = getCalculationParams(get(), overrides);
           const totalEnergy = calculateTotalEnergy(params);
-          set({ engineerBonus: enabled, totalEnergy });
+          set({ ...overrides, totalEnergy });
         } else {
-          const params = { ...params1, ...params2, commandingStaffBonus: false, highPerformanceTransformerLevel };
+          // Disabling engineer bonus requires disabling commanding staff bonus since it's part of the same system
+          const overrides = { engineerBonus: enabled, commandingStaffBonus: false };
+          const params = getCalculationParams(get(), overrides);
           const totalEnergy = calculateTotalEnergy(params);
-          set({ engineerBonus: enabled, commandingStaffBonus: false, totalEnergy });
+          set({ ...overrides, totalEnergy });
         }
       },
-      setCommandingStaffBonus: (enabled: boolean) => {
-        const { fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus, engineerBonus } = get();
-        const { baseEnergy, allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus };
-        const params2 = { engineerBonus, commandingStaffBonus: enabled, allianceBonus, disruptionChamberLevel };
+      setCommandingStaffBonus: enabled => {
         if (enabled) {
-          const params = { ...params1, ...params2, engineerBonus: true, highPerformanceTransformerLevel };
+          // The engineer is part of the commanding staff so we need to enable both
+          const overrides = { commandingStaffBonus: enabled, engineerBonus: true };
+          const params = getCalculationParams(get(), overrides);
           const totalEnergy = calculateTotalEnergy(params);
-          set({ engineerBonus: true, commandingStaffBonus: enabled, totalEnergy });
+          set({ ...overrides, totalEnergy });
         } else {
-          const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+          const overrides = { commandingStaffBonus: enabled };
+          const params = getCalculationParams(get(), overrides);
           const totalEnergy = calculateTotalEnergy(params);
-          set({ commandingStaffBonus: enabled, totalEnergy });
+          set({ ...overrides, totalEnergy });
         }
       },
-      setAllianceBonus: (enabled: boolean) => {
-        const { fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus, engineerBonus, baseEnergy } = get();
-        const { commandingStaffBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = get();
-        const params1 = { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, allianceBonus: enabled };
-        const params2 = { lifeformTechBonus, engineerBonus, commandingStaffBonus, disruptionChamberLevel };
-        const params = { ...params1, ...params2, highPerformanceTransformerLevel };
+      setAllianceBonus: enabled => {
+        const overrides = { allianceBonus: enabled };
+        const params = getCalculationParams(get(), overrides);
         const totalEnergy = calculateTotalEnergy(params);
-        set({ allianceBonus: enabled, totalEnergy });
+        set({ ...overrides, totalEnergy });
       },
       reset: () => {
         set(state => ({ ...state, ...initialState }));

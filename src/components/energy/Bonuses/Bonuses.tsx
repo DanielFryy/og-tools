@@ -1,10 +1,10 @@
 "use client";
 
-import { Info } from "lucide-react";
 import { ChangeEvent } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { BonusesProps as Props } from "./Bonuses.types";
+import InfoTooltip from "@/components/global/InfoTooltip/InfoTooltip";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +14,6 @@ import { SelectValue } from "@/components/ui/select";
 import { SelectTrigger } from "@/components/ui/select";
 import { Select } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useEnergyStore } from "@/stores/energy/energy.store";
 
 const Bonuses = (props: Props) => {
@@ -43,19 +42,16 @@ const Bonuses = (props: Props) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="item-bonus" className="flex items-center gap-1">
-            Bonus from Items
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Energy bonus from items like Energy Booster</p>
-              </TooltipContent>
-            </Tooltip>
-          </Label>
+          <div className="flex items-center gap-1">
+            <Label htmlFor="item-bonus" id="item-bonus-label">
+              Bonus from Items
+            </Label>
+            <InfoTooltip id="item-bonus-tooltip" ariaLabelledBy="item-bonus-label">
+              Energy bonus from items like Energy Booster
+            </InfoTooltip>
+          </div>
           <Select value={itemBonus} onValueChange={setItemBonus}>
-            <SelectTrigger className="w-full" size="sm">
+            <SelectTrigger className="w-full" size="sm" id="item-bonus">
               <SelectValue placeholder="Select item bonus" />
             </SelectTrigger>
             <SelectContent>
@@ -69,17 +65,14 @@ const Bonuses = (props: Props) => {
         </div>
 
         <div className="flex flex-col gap-2">
-          <Label htmlFor="lifeform-bonus" className="flex items-center gap-1">
-            Lifeform Tech Bonus (%)
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Energy bonus from lifeform technologies (can be decimal like 7.5)</p>
-              </TooltipContent>
-            </Tooltip>
-          </Label>
+          <div className="flex items-center gap-1">
+            <Label htmlFor="lifeform-bonus" id="lifeform-bonus-label">
+              Lifeform Tech Bonus (%)
+            </Label>
+            <InfoTooltip id="lifeform-bonus-tooltip" ariaLabelledBy="lifeform-bonus-label">
+              Energy bonus from lifeform technologies (can be decimal like 7.5)
+            </InfoTooltip>
+          </div>
           <Input
             id="lifeform-bonus"
             type="number"
@@ -94,17 +87,14 @@ const Bonuses = (props: Props) => {
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
             <Switch id="engineer-bonus" checked={engineerBonus} onCheckedChange={setEngineerBonus} />
-            <Label htmlFor="engineer-bonus" className="flex items-center gap-1">
-              Engineer Bonus (+10%)
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Energy bonus from having an Engineer officer</p>
-                </TooltipContent>
-              </Tooltip>
-            </Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="engineer-bonus" id="engineer-bonus-label">
+                Engineer Bonus (+10%)
+              </Label>
+              <InfoTooltip id="engineer-bonus-tooltip" ariaLabelledBy="engineer-bonus-label">
+                Energy bonus from having an Engineer officer
+              </InfoTooltip>
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
@@ -113,32 +103,27 @@ const Bonuses = (props: Props) => {
               checked={commandingStaffBonus}
               onCheckedChange={setCommandingStaffBonus}
             />
-            <Label htmlFor="commanding-staff-bonus" className="flex items-center gap-1">
-              Commanding Staff Bonus (+2%)
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>The bonus from the engineer is also applied</p>
-                </TooltipContent>
-              </Tooltip>
-            </Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="commanding-staff-bonus" id="commanding-staff-bonus-label">
+                Commanding Staff Bonus (+2%)
+              </Label>
+              <InfoTooltip id="commanding-staff-bonus-tooltip" ariaLabelledBy="commanding-staff-bonus-label">
+                The bonus from the engineer is also applied
+              </InfoTooltip>
+            </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Switch id="commanding-staff-bonus" checked={allianceBonus} onCheckedChange={setAllianceBonus} />
-            <Label htmlFor="commanding-staff-bonus" className="flex items-center gap-1">
-              Traders Alliance Bonus (+5%)
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Energy bonus from being in a Traders alliance</p>
-                </TooltipContent>
-              </Tooltip>
-            </Label>
+            <Switch id="alliance-bonus" checked={allianceBonus} onCheckedChange={setAllianceBonus} />
+
+            <div className="flex items-center gap-1">
+              <Label htmlFor="alliance-bonus" id="alliance-bonus-label">
+                Traders Alliance Bonus (+5%)
+              </Label>
+              <InfoTooltip id="alliance-bonus-tooltip" ariaLabelledBy="alliance-bonus-label">
+                Energy bonus from being in a Traders alliance
+              </InfoTooltip>
+            </div>
           </div>
         </div>
       </CardContent>

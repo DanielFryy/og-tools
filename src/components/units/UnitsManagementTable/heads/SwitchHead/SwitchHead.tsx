@@ -1,9 +1,9 @@
-import { Info } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { SwitchHeadProps as Props } from "./SwitchHead.types";
+import InfoTooltip from "@/components/global/InfoTooltip/InfoTooltip";
+import { Label } from "@/components/ui/label";
 import { TableHead } from "@/components/ui/table";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const SwitchHead = (props: Props) => {
   const { className } = props;
@@ -11,15 +11,10 @@ const SwitchHead = (props: Props) => {
   return (
     <TableHead className={twMerge("w-[80px] text-center font-semibold", className)}>
       <div className="flex items-center justify-center gap-1">
-        Use
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p>Toggle to include or exclude units from calculations</p>
-          </TooltipContent>
-        </Tooltip>
+        <Label id="switch-head-label">Use</Label>
+        <InfoTooltip id="switch-head-tooltip" ariaLabelledBy="switch-head-label">
+          Toggle to include or exclude units from calculations
+        </InfoTooltip>
       </div>
     </TableHead>
   );

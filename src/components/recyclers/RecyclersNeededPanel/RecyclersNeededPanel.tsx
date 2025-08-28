@@ -1,16 +1,16 @@
 "use client";
 
-import { RecycleIcon, Info } from "lucide-react";
+import { RecycleIcon } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { RecyclersNeededPanelProps as Props } from "./RecyclersNeededPanel.types";
+import InfoTooltip from "@/components/global/InfoTooltip/InfoTooltip";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import useNumberFormatter from "@/hooks/useNumberFormatter";
 import { calculateTotals } from "@/lib/utils";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
@@ -58,17 +58,14 @@ const RecyclersNeededPanel = (props: Props) => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">
-              <Label htmlFor="debris-percentage" className="text-sm font-medium flex items-center gap-1">
-                Debris field percentage
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Percentage of resources that go to the debris field</p>
-                  </TooltipContent>
-                </Tooltip>
-              </Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="debris-percentage" id="debris-percentage-label">
+                  Debris field percentage
+                </Label>
+                <InfoTooltip id="debris-percentage-tooltip" ariaLabelledBy="debris-percentage-label">
+                  Percentage of resources that go to the debris field
+                </InfoTooltip>
+              </div>
               <span className="text-sm">{debrisPercentage}%</span>
             </div>
             <Slider
@@ -81,32 +78,26 @@ const RecyclersNeededPanel = (props: Props) => {
 
           <div className="flex items-center gap-2">
             <Switch id="include-deuterium" checked={isDeuteriumIncluded} onCheckedChange={setIsDeuteriumIncluded} />
-            <Label htmlFor="include-deuterium" className="flex items-center gap-1">
-              Include deuterium in debris field
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Some servers include deuterium in the debris field, others don't</p>
-                </TooltipContent>
-              </Tooltip>
-            </Label>
+            <div className="flex items-center gap-1">
+              <Label htmlFor="include-deuterium" id="include-deuterium-label">
+                Include deuterium in debris field
+              </Label>
+              <InfoTooltip id="include-deuterium-tooltip" ariaLabelledBy="include-deuterium-label">
+                Some servers include deuterium in the debris field, others don't
+              </InfoTooltip>
+            </div>
           </div>
 
           <div className="flex flex-col gap-2">
             <div className="flex justify-between">
-              <Label htmlFor="recycler-capacity" className="text-sm font-medium flex items-center gap-1">
-                Recycler capacity
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Cargo capacity of each recycler</p>
-                  </TooltipContent>
-                </Tooltip>
-              </Label>
+              <div className="flex items-center gap-1">
+                <Label htmlFor="recycler-capacity" id="recycler-capacity-label">
+                  Recycler capacity
+                </Label>
+                <InfoTooltip id="recycler-capacity-tooltip" ariaLabelledBy="recycler-capacity-label">
+                  Cargo capacity of each recycler
+                </InfoTooltip>
+              </div>
             </div>
             <Input
               id="recycler-capacity"

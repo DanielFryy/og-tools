@@ -1,13 +1,12 @@
 "use client";
 
-import { Info } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 import { TechLevelsProps as Props } from "./TechLevels.types";
+import InfoTooltip from "@/components/global/InfoTooltip/InfoTooltip";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useIpmsStore } from "@/stores/ipms/ipms.store";
 
 const TechLevels = (props: Props) => {
@@ -25,17 +24,14 @@ const TechLevels = (props: Props) => {
       </CardHeader>
       <CardContent className="grid grid-cols-2 gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="enemy-armor" className="flex items-center gap-1">
-            Enemy Armor Technology
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Each level increases defense hull by 10%</p>
-              </TooltipContent>
-            </Tooltip>
-          </Label>
+          <div className="flex items-center gap-1">
+            <Label htmlFor="enemy-armor" id="enemy-armor-label">
+              Enemy Armor Technology
+            </Label>
+            <InfoTooltip id="enemy-armor-tooltip" ariaLabelledBy="enemy-armor-label">
+              Each level increases defense hull by 10%
+            </InfoTooltip>
+          </div>
           <Input
             id="enemy-armor"
             type="number"
@@ -46,17 +42,14 @@ const TechLevels = (props: Props) => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <Label htmlFor="your-weapons" className="flex items-center gap-1">
-            Your Weapons Technology
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Info className="h-4 w-4 text-muted-foreground cursor-help" />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Each level increases IPM damage by 10%</p>
-              </TooltipContent>
-            </Tooltip>
-          </Label>
+          <div className="flex items-center gap-1">
+            <Label htmlFor="your-weapons" id="your-weapons-label">
+              Your Weapons Technology
+            </Label>
+            <InfoTooltip id="your-weapons-tooltip" ariaLabelledBy="your-weapons-label">
+              Each level increases IPM damage by 10%
+            </InfoTooltip>
+          </div>
           <Input
             id="your-weapons"
             type="number"

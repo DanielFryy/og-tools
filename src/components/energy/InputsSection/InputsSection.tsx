@@ -19,8 +19,8 @@ const InputsSection = (props: Props) => {
       <BasicParameters />
       <LifeformStructures />
       <Bonuses />
-      <Button onClick={reset} variant="outline" size="lg" className="w-full bg-transparent">
-        <RotateCcw className="h-4 w-4 mr-2" />
+      <Button type="button" onClick={reset} variant="outline" size="lg" className="w-full bg-transparent">
+        <RotateCcw aria-hidden="true" className="h-4 w-4 mr-2" />
         Reset All Fields
       </Button>
     </div>
