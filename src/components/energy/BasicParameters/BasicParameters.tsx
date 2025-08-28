@@ -24,7 +24,7 @@ const BasicParameters = (props: Props) => {
 
   const energyTechLevelChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const n = Math.floor(e.currentTarget.valueAsNumber);
-    setEnergyTechLevel(Number.isFinite(n) ? Math.max(0, n) : 0);
+    setEnergyTechLevel(Number.isFinite(n) ? Math.max(1, n) : 1);
   };
 
   return (
@@ -40,7 +40,7 @@ const BasicParameters = (props: Props) => {
               <Label htmlFor="fusion-level" id="fusion-level-label">
                 Fusion Reactor Level
               </Label>
-              <InfoTooltip id="disruption-chamber-tooltip" ariaLabelledBy="fusion-level-label">
+              <InfoTooltip id="fusion-level-tooltip" ariaLabelledBy="fusion-level-label">
                 <p>The level of your Fusion Reactor building</p>
               </InfoTooltip>
             </div>

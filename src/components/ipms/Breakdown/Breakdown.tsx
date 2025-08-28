@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronsUpDown } from "lucide-react";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { BreakdownProps as Props } from "./Breakdown.types";
@@ -20,6 +20,8 @@ const Breakdown = (props: Props) => {
   const units = useIpmsStore(state => state.units);
   const result = useIpmsStore(state => state.result);
   const [isOpen, setIsOpen] = useState(false);
+  const contentId = useId();
+  const toggleLabel = isOpen ? "Collapse breakdown details" : "Expand breakdown details";
 
   const calculateIPMDamage = () => {
     const baseDamage = WP;
@@ -63,9 +65,16 @@ const Breakdown = (props: Props) => {
             <CardDescription>IPM requirements per defense type</CardDescription>
           </div>
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8">
-              <ChevronsUpDown />
-              <span className="sr-only">Toggle</span>
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="size-8"
+              aria-controls={contentId}
+              aria-expanded={isOpen}
+            >
+              <ChevronsUpDown aria-hidden="true" focusable="false" />
+              <span className="sr-only">{toggleLabel}</span>
             </Button>
           </CollapsibleTrigger>
         </CardHeader>

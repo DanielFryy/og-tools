@@ -23,7 +23,7 @@ const Results = (props: Props) => {
       <CardContent className="flex flex-col gap-6">
         <div className="text-center p-6 border rounded-lg bg-muted/30">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <Zap className="h-6 w-6 text-yellow-500" />
+            <Zap className="h-6 w-6 text-yellow-500" aria-hidden="true" />
             <span className="text-lg font-medium">Base Energy</span>
           </div>
           <div className="text-3xl font-bold text-primary">{baseEnergy.toLocaleString()}</div>

@@ -24,8 +24,15 @@ const Information = (props: Props) => {
             <CardDescription>About fusion reactor energy production</CardDescription>
           </div>
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="icon" className="size-8" aria-controls={contentId} aria-expanded={isOpen}>
-              <ChevronsUpDown />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="size-8"
+              aria-controls={contentId}
+              aria-expanded={isOpen}
+            >
+              <ChevronsUpDown aria-hidden="true" focusable="false" />
               <span className="sr-only">{toggleLabel}</span>
             </Button>
           </CollapsibleTrigger>

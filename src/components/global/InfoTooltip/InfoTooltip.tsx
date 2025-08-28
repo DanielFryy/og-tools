@@ -18,7 +18,7 @@ const InfoTooltip = (props: Props) => {
           variant="ghost"
           className="cursor-help hover:bg-transparent size-4 !p-0"
         >
-          <Info className="h-4 w-4 text-muted-foreground min-h-4 min-w-4" />
+          <Info className="h-4 w-4 text-muted-foreground min-h-4 min-w-4" aria-hidden="true" />
         </Button>
       </TooltipTrigger>
       <TooltipContent id={id} className={twMerge("InfoTooltip", className)}>

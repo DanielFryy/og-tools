@@ -62,7 +62,10 @@ export const calculateTotalEnergy = (params: CalculationParams) => {
   return baseEnergy + bonus;
 };
 
-export const getCalculationParams = (state: EnergyStore, overrides: Partial<EnergyStore> = {}): CalculationParams => {
+export const getCalculationParams = (
+  state: EnergyStore,
+  overrides: Partial<CalculationParams> = {}
+): CalculationParams => {
   const { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, allianceBonus, lifeformTechBonus } = state;
   const { engineerBonus, commandingStaffBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = state;
 
