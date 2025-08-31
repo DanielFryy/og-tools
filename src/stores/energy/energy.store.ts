@@ -82,6 +82,12 @@ export const useEnergyStore = create<EnergyStore>()(
         const totalEnergy = calculateTotalEnergy(params);
         set({ ...overrides, totalEnergy });
       },
+      setClassBonus: enabled => {
+        const overrides = { classBonus: enabled };
+        const params = getCalculationParams(get(), overrides);
+        const totalEnergy = calculateTotalEnergy(params);
+        set({ ...overrides, totalEnergy });
+      },
       reset: () => {
         set(state => ({ ...state, ...initialState }));
       }

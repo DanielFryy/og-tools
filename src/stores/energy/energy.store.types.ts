@@ -13,6 +13,7 @@ export type EnergyStore = {
   engineerBonus: boolean;
   commandingStaffBonus: boolean;
   allianceBonus: boolean;
+  classBonus: boolean;
   setFusionReactorLevel: (level: number) => void;
   setEnergyTechLevel: (level: number) => void;
   setDisruptionChamberLevel: (level: number) => void;
@@ -22,6 +23,7 @@ export type EnergyStore = {
   setEngineerBonus: (enabled: boolean) => void;
   setCommandingStaffBonus: (enabled: boolean) => void;
   setAllianceBonus: (enabled: boolean) => void;
+  setClassBonus: (enabled: boolean) => void;
   reset: () => void;
 };
 

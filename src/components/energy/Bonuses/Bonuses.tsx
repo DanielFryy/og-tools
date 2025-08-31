@@ -23,11 +23,13 @@ const Bonuses = (props: Props) => {
   const engineerBonus = useEnergyStore(state => state.engineerBonus);
   const commandingStaffBonus = useEnergyStore(state => state.commandingStaffBonus);
   const allianceBonus = useEnergyStore(state => state.allianceBonus);
+  const classBonus = useEnergyStore(state => state.classBonus);
   const setItemBonus = useEnergyStore(state => state.setItemBonus);
   const setLifeformTechBonus = useEnergyStore(state => state.setLifeformTechBonus);
   const setEngineerBonus = useEnergyStore(state => state.setEngineerBonus);
   const setCommandingStaffBonus = useEnergyStore(state => state.setCommandingStaffBonus);
   const setAllianceBonus = useEnergyStore(state => state.setAllianceBonus);
+  const setClassBonus = useEnergyStore(state => state.setClassBonus);
 
   const lifeformTechBonusChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const numValue = parseFloat(e.target.value);
@@ -63,7 +65,6 @@ const Bonuses = (props: Props) => {
             </SelectContent>
           </Select>
         </div>
-
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-1">
             <Label htmlFor="lifeform-bonus" id="lifeform-bonus-label">
@@ -83,7 +84,6 @@ const Bonuses = (props: Props) => {
             placeholder="0"
           />
         </div>
-
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
             <Switch id="engineer-bonus" checked={engineerBonus} onCheckedChange={setEngineerBonus} />
@@ -96,7 +96,6 @@ const Bonuses = (props: Props) => {
               </InfoTooltip>
             </div>
           </div>
-
           <div className="flex items-center gap-2">
             <Switch
               id="commanding-staff-bonus"
@@ -112,10 +111,19 @@ const Bonuses = (props: Props) => {
               </InfoTooltip>
             </div>
           </div>
-
+          <div className="flex items-center gap-2">
+            <Switch id="class-bonus" checked={classBonus} onCheckedChange={setClassBonus} />
+            <div className="flex items-center gap-1">
+              <Label htmlFor="class-bonus" id="class-bonus-label">
+                Collector Class Bonus (+10%)
+              </Label>
+              <InfoTooltip id="class-bonus-tooltip" ariaLabelledBy="class-bonus-label">
+                Energy bonus from being in the Collector class
+              </InfoTooltip>
+            </div>
+          </div>
           <div className="flex items-center gap-2">
             <Switch id="alliance-bonus" checked={allianceBonus} onCheckedChange={setAllianceBonus} />
-
             <div className="flex items-center gap-1">
               <Label htmlFor="alliance-bonus" id="alliance-bonus-label">
                 Traders Alliance Bonus (+5%)

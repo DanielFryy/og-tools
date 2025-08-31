@@ -13,7 +13,8 @@ export const initialState: OmitFunctionProperties<EnergyStore> = {
   lifeformTechBonus: 0,
   engineerBonus: false,
   commandingStaffBonus: false,
-  allianceBonus: false
+  allianceBonus: false,
+  classBonus: false
 } as const;
 
 export const calculateBaseEnergy = (fusionReactorLevel: number, energyTechLevel: number) => {
@@ -26,6 +27,7 @@ export const calculateBaseEnergy = (fusionReactorLevel: number, energyTechLevel:
 export const calculateTotalEnergy = (params: CalculationParams) => {
   const { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, lifeformTechBonus, engineerBonus } = params;
   const { commandingStaffBonus, allianceBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = params;
+  const { classBonus } = params;
 
   // To build a fusion reactor it's necessary to have at least 1 Energy Technology Level
   if (fusionReactorLevel <= 0 || energyTechLevel < 1) return 0;
@@ -59,6 +61,9 @@ export const calculateTotalEnergy = (params: CalculationParams) => {
   // Alliance bonus (5%)
   if (allianceBonus) bonus += baseEnergy * 0.05;
 
+  // Collector Class bonus (10%)
+  if (classBonus) bonus += baseEnergy * 0.1;
+
   return baseEnergy + bonus;
 };
 
@@ -68,6 +73,7 @@ export const getCalculationParams = (
 ): CalculationParams => {
   const { baseEnergy, fusionReactorLevel, energyTechLevel, itemBonus, allianceBonus, lifeformTechBonus } = state;
   const { engineerBonus, commandingStaffBonus, disruptionChamberLevel, highPerformanceTransformerLevel } = state;
+  const { classBonus } = state;
 
   return {
     baseEnergy,
@@ -80,6 +86,7 @@ export const getCalculationParams = (
     commandingStaffBonus,
     disruptionChamberLevel,
     highPerformanceTransformerLevel,
+    classBonus,
     ...overrides
   };
 };

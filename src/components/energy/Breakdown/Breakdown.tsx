@@ -23,6 +23,7 @@ const Breakdown = (props: Props) => {
   const engineerBonus = useEnergyStore(state => state.engineerBonus);
   const commandingStaffBonus = useEnergyStore(state => state.commandingStaffBonus);
   const allianceBonus = useEnergyStore(state => state.allianceBonus);
+  const classBonus = useEnergyStore(state => state.classBonus);
   const [isOpen, setIsOpen] = useState(false);
   const itemBonusValue = (() => {
     const n = parseFloat(itemBonus);
@@ -36,7 +37,8 @@ const Breakdown = (props: Props) => {
     itemBonusValue > 0 ||
     engineerBonus ||
     commandingStaffBonus ||
-    allianceBonus;
+    allianceBonus ||
+    classBonus;
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
@@ -66,28 +68,31 @@ const Breakdown = (props: Props) => {
                 <div className="flex flex-col gap-2">
                   <div className="font-medium">Applied Bonuses:</div>
                   <div className="flex flex-col gap-1 text-muted-foreground">
+                    {disruptionChamberBonus > 0 ? (
+                      <div>
+                        • Disruption Chamber: {(baseEnergy * (disruptionChamberBonus / 100)).toLocaleString()} (+
+                        {disruptionChamberBonus}%)
+                      </div>
+                    ) : null}
                     {itemBonusValue > 0 ? (
                       <div>
-                        • Item Bonus: +{itemBonusValue}% = {(baseEnergy * (itemBonusValue / 100)).toLocaleString()}
+                        • Item Bonus: {(baseEnergy * (itemBonusValue / 100)).toLocaleString()} (+{itemBonusValue}%)
                       </div>
                     ) : null}
                     {lifeformBonus > 0 ? (
                       <div>
-                        • Lifeform Tech: +{lifeformBonus}% = {(baseEnergy * (lifeformBonus / 100)).toLocaleString()}
+                        • Lifeform Tech: {(baseEnergy * (lifeformBonus / 100)).toLocaleString()} (+{lifeformBonus}%)
                       </div>
                     ) : null}
-                    {engineerBonus ? <div>• Engineer: +10% = {(baseEnergy * (1 / 10)).toLocaleString()}</div> : null}
+                    {engineerBonus ? <div>• Engineer: {(baseEnergy * (10 / 100)).toLocaleString()} (+10%)</div> : null}
                     {commandingStaffBonus ? (
-                      <div>• Commanding Staff: +2% = {(baseEnergy * (2 / 100)).toLocaleString()}</div>
+                      <div>• Commanding Staff: {(baseEnergy * (2 / 100)).toLocaleString()} (+2%)</div>
                     ) : null}
                     {allianceBonus ? (
-                      <div>• Alliance Bonus: +5% = {(baseEnergy * (5 / 100)).toLocaleString()}</div>
+                      <div>• Alliance Bonus: {(baseEnergy * (5 / 100)).toLocaleString()} (+5%)</div>
                     ) : null}
-                    {disruptionChamberBonus > 0 ? (
-                      <div>
-                        • Disruption Chamber: +{disruptionChamberBonus}% ={" "}
-                        {(baseEnergy * (disruptionChamberBonus / 100)).toLocaleString()}
-                      </div>
+                    {classBonus ? (
+                      <div>• Collector Class: {(baseEnergy * (10 / 100)).toLocaleString()} (+10%)</div>
                     ) : null}
                   </div>
                 </div>
