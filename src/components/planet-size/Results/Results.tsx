@@ -15,7 +15,6 @@ const Results = (props: Props) => {
   const researchersAllianceBonus = usePlanetSizeStore(state => state.researchersAllianceBonus);
   const kaeleshLevel = usePlanetSizeStore(state => state.kaeleshDiscovererEnhancementLevel);
   const universeBonus = usePlanetSizeStore(state => state.universeBonus);
-
   const currentSlotData = planetSlots.find(s => s.slot === Number.parseInt(planetSlot || "8", 10));
 
   const getTotalDiameterBonus = (): number => {

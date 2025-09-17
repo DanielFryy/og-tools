@@ -14,6 +14,8 @@ const SlotSelect = (props: Props) => {
   const { className } = props;
   const planetSlot = usePlanetSizeStore(state => state.planetSlot);
   const setPlanetSlot = usePlanetSizeStore(state => state.setPlanetSlot);
+  const currentSlotData = planetSlots.find(s => s.slot === Number.parseInt(planetSlot || "8", 10));
+  const { bonus } = currentSlotData ?? {};
 
   return (
     <Card className={twMerge("SlotSelect", className)}>
@@ -43,6 +45,7 @@ const SlotSelect = (props: Props) => {
               ))}
             </SelectContent>
           </Select>
+          {bonus ? <div className="text-xs text-green-600 dark:text-green-400">{bonus}</div> : null}
         </div>
       </CardContent>
     </Card>
