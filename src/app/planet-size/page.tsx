@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+
 import Breakdown from "@/components/planet-size/Breakdown/Breakdown";
 import Information from "@/components/planet-size/Information/Information";
 import InputsSection from "@/components/planet-size/InputsSection/InputsSection";
@@ -5,7 +7,13 @@ import PlanetSlotCharts from "@/components/planet-size/PlanetSlotCharts/PlanetSl
 import Results from "@/components/planet-size/Results/Results";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default function PlanetSizePage() {
+export const metadata: Metadata = {
+  title: "OG-Tools | Planet Size Calculator",
+  description:
+    "Calculate the size and characteristics of planets based on various parameters. Optimize your planet design for efficient resource management."
+};
+
+const PlanetSizePage = () => {
   return (
     <div className="PlanetSizePage flex-1 flex items-center justify-center h-fit min-h-full">
       <Tabs defaultValue="values" className="flex flex-col gap-6">
@@ -33,4 +41,6 @@ export default function PlanetSizePage() {
       </Tabs>
     </div>
   );
-}
+};
+
+export default PlanetSizePage;
