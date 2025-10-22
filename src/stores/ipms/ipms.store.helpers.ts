@@ -8,6 +8,7 @@ const { ALL: UNITS } = CONSTANTS.DEFENSES;
 export const initialState: OmitFunctionProperties<IpmsStore> = {
   units: UNITS.map(unit => ({ ...unit, amount: 0, ratio: 0, enabled: true })),
   enemyArmorTechLevel: 0,
+  missileSiloLevel: 0,
   weaponTechLevel: 0,
   result: 0
 } as const;

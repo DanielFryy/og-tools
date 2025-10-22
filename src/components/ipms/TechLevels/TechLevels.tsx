@@ -1,5 +1,6 @@
 "use client";
 
+import { ChangeEvent } from "react";
 import { twMerge } from "tailwind-merge";
 
 import { TechLevelsProps as Props } from "./TechLevels.types";
@@ -13,8 +14,25 @@ const TechLevels = (props: Props) => {
   const { className } = props;
   const enemyArmorTechLevel = useIpmsStore(state => state.enemyArmorTechLevel);
   const weaponTechLevel = useIpmsStore(state => state.weaponTechLevel);
+  const missileSiloLevel = useIpmsStore(state => state.missileSiloLevel);
   const setEnemyArmorTechLevel = useIpmsStore(state => state.setEnemyArmorTechLevel);
   const setWeaponTechLevel = useIpmsStore(state => state.setWeaponTechLevel);
+  const setMissileSiloLevel = useIpmsStore(state => state.setMissileSiloLevel);
+
+  const enemyArmorTechLevelChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const numValue = e.target.valueAsNumber;
+    setEnemyArmorTechLevel(isNaN(numValue) ? 0 : Math.max(0, numValue));
+  };
+
+  const weaponTechLevelChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const numValue = e.target.valueAsNumber;
+    setWeaponTechLevel(isNaN(numValue) ? 0 : Math.max(0, numValue));
+  };
+
+  const missileSiloLevelChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const numValue = e.target.valueAsNumber;
+    setMissileSiloLevel(isNaN(numValue) ? 0 : Math.max(0, numValue));
+  };
 
   return (
     <Card className={twMerge("TechLevels", className)}>
@@ -37,7 +55,7 @@ const TechLevels = (props: Props) => {
             type="number"
             min="0"
             value={enemyArmorTechLevel}
-            onChange={e => setEnemyArmorTechLevel(Math.max(0, Number.parseInt(e.target.value) || 0))}
+            onChange={enemyArmorTechLevelChangeHandler}
             placeholder="0"
           />
         </div>
@@ -55,7 +73,25 @@ const TechLevels = (props: Props) => {
             type="number"
             min="0"
             value={weaponTechLevel}
-            onChange={e => setWeaponTechLevel(Math.max(0, Number.parseInt(e.target.value) || 0))}
+            onChange={weaponTechLevelChangeHandler}
+            placeholder="0"
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center gap-1">
+            <Label htmlFor="missile-silo" id="missile-silo-label">
+              Missile Silo Level
+            </Label>
+            <InfoTooltip id="missile-silo-tooltip" ariaLabelledBy="missile-silo-label">
+              It would determine how many missiles can be launched per round (level * 5).
+            </InfoTooltip>
+          </div>
+          <Input
+            id="missile-silo"
+            type="number"
+            min="0"
+            value={missileSiloLevel}
+            onChange={missileSiloLevelChangeHandler}
             placeholder="0"
           />
         </div>

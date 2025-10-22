@@ -11,6 +11,9 @@ export const useIpmsStore = create<IpmsStore>()(
       setEnemyArmorTechLevel: level => {
         set({ enemyArmorTechLevel: level });
       },
+      setMissileSiloLevel: level => {
+        set({ missileSiloLevel: level });
+      },
       setWeaponTechLevel: level => {
         set({ weaponTechLevel: level });
       },

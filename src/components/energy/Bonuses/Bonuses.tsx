@@ -32,7 +32,7 @@ const Bonuses = (props: Props) => {
   const setClassBonus = useEnergyStore(state => state.setClassBonus);
 
   const lifeformTechBonusChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const numValue = parseFloat(e.target.value);
+    const numValue = e.target.valueAsNumber;
     setLifeformTechBonus(isNaN(numValue) ? 0 : Math.max(0, numValue));
   };
 

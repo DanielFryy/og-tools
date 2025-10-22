@@ -5,8 +5,10 @@ import { OmitFunctionProperties } from "@/types/Utils.types";
 export type IpmsStore = {
   units: EnhancedDefense[];
   enemyArmorTechLevel: number;
+  missileSiloLevel: number;
   weaponTechLevel: number;
   result: number;
+  setMissileSiloLevel: (level: number) => void;
   setEnemyArmorTechLevel: (level: number) => void;
   setWeaponTechLevel: (level: number) => void;
   setAmount: (unitName: string, amount: number) => void;
