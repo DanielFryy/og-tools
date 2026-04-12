@@ -61,7 +61,7 @@ OG-Tools is a Next.js/React app for OGame players, providing calculators for def
 - **Radix UI** for accessible primitives.
 - **Zustand** for state management.
 - **Tailwind CSS** for styling.
-- **Prettier/ESLint/Commitlint** for code quality.
+- **Prettier/ESLint** for code quality.
 
 ## Examples
 
