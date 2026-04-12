@@ -1,14 +1,17 @@
 // GlobalsStore types and interfaces
-import { PlayerClass } from "@/types/Global.types";
+import { PlayerClass, PlayerClassType } from "@/types/Global.types";
 
-export interface GlobalsStore {
-  selectedPlayerClass: PlayerClass | null;
+export interface GlobalsState {
+  selectedPlayerClass: PlayerClass;
   sidebarOpen: boolean;
   favoriteRoutes: FavoriteRoute[];
+}
+
+export interface GlobalsStore extends GlobalsState {
   setFavoriteRoute: (favoriteRoute: FavoriteRoute) => void;
   removeFavoriteRoute: (favoriteRoute: FavoriteRoute) => void;
   setSidebarOpen: (value: boolean) => void;
-  setSelectedPlayerClass: (playerClassType: string) => void;
+  setSelectedPlayerClass: (playerClassType: PlayerClassType) => void;
   reset: () => void;
 }
 

@@ -324,6 +324,16 @@ const allDefenses: Defense[] = [...mainDefenses, ...shieldDefenses, ...missileDe
 const enhancedDefenses: Defense[] = [...mainDefenses, deathstar] as const;
 
 // Player Classes
+const all: PlayerClass = {
+  type: "All",
+  bonuses: []
+} as const;
+
+const none: PlayerClass = {
+  type: "None",
+  bonuses: []
+} as const;
+
 const collector: PlayerClass = {
   type: "Collector",
   bonuses: []
@@ -339,7 +349,7 @@ const discoverer: PlayerClass = {
   bonuses: []
 } as const;
 
-const playerClasses: PlayerClass[] = [collector, general, discoverer] as const;
+const playerClasses: PlayerClass[] = [all, none, collector, general, discoverer] as const;
 
 export const CONSTANTS = {
   SHIPS: {

@@ -1,6 +1,7 @@
 import { ResourceCellProps as Props } from "./ResourceCell.types";
 import { TableCell } from "@/components/ui/table";
 import useNumberFormatter from "@/hooks/useNumberFormatter";
+import { isUnitAvailableForPlayerClass } from "@/lib/playerClass";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const ResourceCell = (props: Props) => {
@@ -9,23 +10,15 @@ const ResourceCell = (props: Props) => {
   const resource = cost[resourceType];
   const formatNumber = useNumberFormatter();
   const calculatedResource = resource * amount;
-  const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType } = selectedPlayerClass ?? {};
-  const cantBuildReaper = name === "Reaper" && playerClassType !== "General";
-  const cantBuildPathfinder = name === "Pathfinder" && playerClassType !== "Discoverer";
-  const disabled = cantBuildReaper || cantBuildPathfinder;
-
-  return (
-    <TableCell className="text-right">
-      {isFree ? (
-        <span>{formatNumber(calculatedResource)}</span>
-      ) : disabled ? (
-        <span className="text-slate-500 font-medium">-</span>
-      ) : (
-        <span className={enabled ? "" : "text-muted-foreground"}>{formatNumber(calculatedResource)}</span>
-      )}
-    </TableCell>
+  const playerClassType = useGlobalsStore(state => state.selectedPlayerClass.type);
+  const disabled = !isUnitAvailableForPlayerClass(name, playerClassType);
+  const freeNode = <span>{formatNumber(calculatedResource)}</span>;
+  const enabledNode = (
+    <span className={enabled ? "" : "text-muted-foreground"}>{formatNumber(calculatedResource)}</span>
   );
+  const notFreeNode = disabled ? <span className="text-slate-500 font-medium">-</span> : enabledNode;
+
+  return <TableCell className="text-right">{isFree ? freeNode : notFreeNode}</TableCell>;
 };
 
 export default ResourceCell;

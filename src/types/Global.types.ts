@@ -1,5 +1,5 @@
 // Global types and interfaces
-export type PlayerClassType = "Collector" | "General" | "Discoverer";
+export type PlayerClassType = "All" | "None" | "Collector" | "General" | "Discoverer";
 
 export interface PlayerClass {
   type: PlayerClassType;

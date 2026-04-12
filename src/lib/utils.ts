@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import { isUnitAvailableForPlayerClass } from "./playerClass";
 import { EnhancedDefense } from "@/stores/defense/defense.store.types";
 import { FreeEnhancedDefense } from "@/stores/freeDefenses/freeDefenses.store.types";
 import { FreeEnhancedShip } from "@/stores/freeShips/freeShips.store.types";
@@ -19,10 +20,6 @@ export const calculateTotals = (
   const totals = units.reduce(
     (acc, unit) => {
       const { name, amount: unitAmount, cost, enabled } = unit;
-      const isReaper = name === "Reaper";
-      const isPathfinder = name === "Pathfinder";
-      const cantBuildReaper = isReaper && playerClassType !== "General";
-      const cantBuildPathfinder = isPathfinder && playerClassType !== "Discoverer";
       const res = {
         amount: acc.amount + unitAmount,
         metal: acc.metal + cost.metal * unitAmount,
@@ -30,7 +27,7 @@ export const calculateTotals = (
         deuterium: acc.deuterium + cost.deuterium * unitAmount
       };
       if (isFree) return res;
-      if (cantBuildReaper || cantBuildPathfinder || !enabled) return acc;
+      if (!isUnitAvailableForPlayerClass(name, playerClassType) || !enabled) return acc;
 
       return res;
     },

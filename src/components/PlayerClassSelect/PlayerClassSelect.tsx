@@ -12,7 +12,7 @@ const PlayerClassSelect = (props: Props) => {
   const setSelectedPlayerClass = useGlobalsStore(state => state.setSelectedPlayerClass);
 
   return (
-    <Select value={selectedPlayerClass?.type} onValueChange={setSelectedPlayerClass}>
+    <Select value={selectedPlayerClass.type} onValueChange={setSelectedPlayerClass}>
       <SelectTrigger className="w-40" size="sm">
         <SelectValue placeholder="Select a class" />
       </SelectTrigger>

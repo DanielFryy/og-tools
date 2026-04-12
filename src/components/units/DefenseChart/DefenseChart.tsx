@@ -11,8 +11,7 @@ import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const DefenseChart = (props: Props) => {
   const { units } = props;
-  const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType = "Collector" } = selectedPlayerClass ?? {};
+  const playerClassType = useGlobalsStore(state => state.selectedPlayerClass.type);
 
   const totals = calculateTotals(units, playerClassType, false);
 
@@ -30,6 +29,7 @@ const DefenseChart = (props: Props) => {
       if (!enabled) return;
 
       return {
+        key: `cell-${index}`,
         name,
         value: points,
         percentage,
@@ -75,8 +75,8 @@ const DefenseChart = (props: Props) => {
                         label={({ name, percentage }) => `${name}: ${percentage}%`}
                         labelLine={false}
                       >
-                        {data.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        {data.map(({ key, color }) => (
+                          <Cell key={key} fill={color} />
                         ))}
                       </Pie>
                       <Tooltip
@@ -99,8 +99,8 @@ const DefenseChart = (props: Props) => {
                         dataKey="value"
                         label={({ name, percentage }) => `${name}: ${percentage}%`}
                       >
-                        {data.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        {data.map(({ key, color }) => (
+                          <Cell key={key} fill={color} />
                         ))}
                       </Pie>
                       <Tooltip
@@ -127,8 +127,8 @@ const DefenseChart = (props: Props) => {
                       />
                       <Legend />
                       <Bar dataKey="value" name="Points" radius={[0, 4, 4, 0]}>
-                        {data.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        {data.map(({ key, color }) => (
+                          <Cell key={key} fill={color} />
                         ))}
                       </Bar>
                     </BarChart>

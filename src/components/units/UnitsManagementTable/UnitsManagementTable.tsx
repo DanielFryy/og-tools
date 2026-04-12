@@ -17,8 +17,7 @@ const UnitsManagementTable = (props: Props) => {
   const { className, units, baseUnitName, onBaseUnitChange, onAmountChange, onRatioChange, title } = props;
   const { onEnableChange, isFree = false } = props;
   const formatNumber = useNumberFormatter();
-  const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType = "Collector" } = selectedPlayerClass ?? {};
+  const playerClassType = useGlobalsStore(state => state.selectedPlayerClass.type);
   const totals = calculateTotals(units, playerClassType, isFree);
   const totalPoints = (totals.metal + totals.crystal + totals.deuterium) / 1_000;
 

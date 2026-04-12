@@ -26,8 +26,7 @@ const RecyclersNeededPanel = (props: Props) => {
   const isDeuteriumIncluded = useRecyclersStore(state => state.isDeuteriumIncluded);
   const setIsDeuteriumIncluded = useRecyclersStore(state => state.setIsDeuteriumIncluded);
   const formatNumber = useNumberFormatter();
-  const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType = "Collector" } = selectedPlayerClass ?? {};
+  const playerClassType = useGlobalsStore(state => state.selectedPlayerClass.type);
   const totals = calculateTotals(staticShips, playerClassType, true);
   const debrisField = {
     metal: Math.floor(totals.metal * (debrisPercentage / 100)),
@@ -44,7 +43,7 @@ const RecyclersNeededPanel = (props: Props) => {
 
   const handleRecyclerCapacityChange = (value: string) => {
     const numValue = Number.parseInt(value, 10);
-    const newCapacity = isNaN(numValue) || numValue < 0 ? 0 : numValue;
+    const newCapacity = Number.isNaN(numValue) || numValue < 0 ? 0 : numValue;
     setRecyclerCargoCapacity(newCapacity);
   };
 

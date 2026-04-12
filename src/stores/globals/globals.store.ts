@@ -1,11 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { initialState } from "./globals.store.helpers";
+import { getPlayerClassByType, initialState, normalizeGlobalsState } from "./globals.store.helpers";
 import { GlobalsStore } from "./globals.store.types";
-import { CONSTANTS } from "@/config/constants";
-
-const { PLAYER_CLASSES } = CONSTANTS;
 
 export const useGlobalsStore = create<GlobalsStore>()(
   persist(
@@ -15,8 +12,7 @@ export const useGlobalsStore = create<GlobalsStore>()(
         set({ sidebarOpen: value });
       },
       setSelectedPlayerClass: playerClassType => {
-        const playerClass = PLAYER_CLASSES.find(playerClass => playerClass.type === playerClassType);
-        if (!playerClass) return;
+        const playerClass = getPlayerClassByType(playerClassType);
         set({ selectedPlayerClass: playerClass });
       },
       setFavoriteRoute: favoriteRoute => {
@@ -35,6 +31,14 @@ export const useGlobalsStore = create<GlobalsStore>()(
         set(state => ({ ...state, ...initialState }));
       }
     }),
-    { name: "globals" }
+    {
+      name: "globals",
+      version: 1,
+      migrate: persistedState => normalizeGlobalsState(persistedState as Partial<typeof initialState> | null),
+      merge: (persistedState, currentState) => ({
+        ...currentState,
+        ...normalizeGlobalsState(persistedState as Partial<typeof initialState> | null)
+      })
+    }
   )
 );

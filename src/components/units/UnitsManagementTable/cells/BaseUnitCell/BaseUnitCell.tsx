@@ -1,16 +1,14 @@
 import { BaseUnitCellProps as Props } from "./BaseUnitCell.types";
 import { TableCell } from "@/components/ui/table";
+import { isUnitAvailableForPlayerClass } from "@/lib/playerClass";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const BaseUnitCell = (props: Props) => {
   const { unit, onChange, baseUnitName } = props;
   const { name } = unit;
-  const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType } = selectedPlayerClass ?? {};
+  const playerClassType = useGlobalsStore(state => state.selectedPlayerClass.type);
   const isBaseUnit = name === baseUnitName;
-  const cantBuildReaper = name === "Reaper" && playerClassType !== "General";
-  const cantBuildPathfinder = name === "Pathfinder" && playerClassType !== "Discoverer";
-  const disabled = cantBuildReaper || cantBuildPathfinder;
+  const disabled = !isUnitAvailableForPlayerClass(name, playerClassType);
 
   return (
     <TableCell className="text-center">

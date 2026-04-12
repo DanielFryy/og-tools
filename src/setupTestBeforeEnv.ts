@@ -2,7 +2,7 @@ import { cleanup } from "@testing-library/react";
 
 afterEach(cleanup);
 
-Object.defineProperty(window, "matchMedia", {
+Object.defineProperty(globalThis.window, "matchMedia", {
   writable: true,
   value: vi.fn().mockImplementation(query => ({
     matches: false,
@@ -16,8 +16,13 @@ Object.defineProperty(window, "matchMedia", {
   }))
 });
 
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn()
 }));
+
+Object.defineProperty(Element.prototype, "scrollIntoView", {
+  configurable: true,
+  value: vi.fn()
+});

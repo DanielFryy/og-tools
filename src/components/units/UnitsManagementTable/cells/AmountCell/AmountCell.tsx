@@ -5,18 +5,16 @@ import { AmountCellProps as Props } from "./AmountCell.types";
 import { Input } from "@/components/ui/input";
 import { TableCell } from "@/components/ui/table";
 import useNumberFormatter from "@/hooks/useNumberFormatter";
+import { isUnitAvailableForPlayerClass } from "@/lib/playerClass";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
 
 const AmountCell = (props: Props) => {
   const { className, unit, onChange, baseUnitName, isFree } = props;
   const formatNumber = useNumberFormatter();
   const { name, amount, enabled } = unit;
-  const selectedPlayerClass = useGlobalsStore(state => state.selectedPlayerClass);
-  const { type: playerClassType } = selectedPlayerClass ?? {};
+  const playerClassType = useGlobalsStore(state => state.selectedPlayerClass.type);
   const isBaseShip = name === baseUnitName;
-  const cantBuildReaper = name === "Reaper" && playerClassType !== "General";
-  const cantBuildPathfinder = name === "Pathfinder" && playerClassType !== "Discoverer";
-  const disabled = cantBuildReaper || cantBuildPathfinder;
+  const disabled = !isUnitAvailableForPlayerClass(name, playerClassType);
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
@@ -41,15 +39,12 @@ const AmountCell = (props: Props) => {
     return <TableCell className={twMerge("text-right", className)}>{inputNode}</TableCell>;
   }
 
+  const enabledNode = <span className={enabled ? "" : "text-muted-foreground"}>{formatNumber(amount)}</span>;
+  const notBaseShipNode = disabled ? <span className="text-slate-500 font-medium">-</span> : enabledNode;
+
   return (
     <TableCell className={twMerge("text-right", isBaseShip ? "" : "pr-3", className)}>
-      {isBaseShip ? (
-        inputNode
-      ) : disabled ? (
-        <span className="text-slate-500 font-medium">-</span>
-      ) : (
-        <span className={enabled ? "" : "text-muted-foreground"}>{formatNumber(amount)}</span>
-      )}
+      {isBaseShip ? inputNode : notBaseShipNode}
     </TableCell>
   );
 };
