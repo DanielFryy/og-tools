@@ -8,3 +8,10 @@ export interface DefenseChartProps {
   className?: string;
   units: EnhancedShip[] | EnhancedDefense[] | FreeEnhancedShip[] | FreeEnhancedDefense[];
 }
+
+export type DefenseChartDatum = {
+  color: string;
+  name: string;
+  percentage: string;
+  value: number;
+};

@@ -1,13 +1,27 @@
 "use client";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, Pie, PieChart, Rectangle, ResponsiveContainer } from "recharts";
+import { Sector, Tooltip, XAxis, YAxis } from "recharts";
+import type { BarShapeProps, PieSectorShapeProps, RectangleProps, SectorProps } from "recharts";
 
-import { DefenseChartProps as Props } from "./DefenseChart.types";
+import { DefenseChartDatum, DefenseChartProps as Props } from "./DefenseChart.types";
+import { getDatumColor } from "./DefenseChart.utils";
 import EmptyState from "@/components/global/EmptyState/EmptyState";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { calculateTotals } from "@/lib/utils";
 import { useGlobalsStore } from "@/stores/globals/globals.store";
+
+const renderPieShape = (props: PieSectorShapeProps) => {
+  const { index, isActive, payload, ...sectorProps } = props;
+
+  return <Sector {...(sectorProps as SectorProps)} fill={getDatumColor(payload) ?? props.fill} />;
+};
+
+const renderBarShape = (props: BarShapeProps) => {
+  const { index, isActive, option, payload, ...rectangleProps } = props;
+
+  return <Rectangle {...(rectangleProps as RectangleProps)} fill={getDatumColor(payload) ?? props.fill} />;
+};
 
 const DefenseChart = (props: Props) => {
   const { units } = props;
@@ -19,7 +33,7 @@ const DefenseChart = (props: Props) => {
   const totalPoints = (totals.crystal + totals.deuterium + totals.metal) / 1_000;
   const hasData = totalPoints > 0;
 
-  const data = units
+  const data: DefenseChartDatum[] = units
     .map((unit, index) => {
       const { name, amount, cost, enabled } = unit;
       const { metal, crystal, deuterium } = cost;
@@ -29,7 +43,6 @@ const DefenseChart = (props: Props) => {
       if (!enabled) return;
 
       return {
-        key: `cell-${index}`,
         name,
         value: points,
         percentage,
@@ -72,15 +85,12 @@ const DefenseChart = (props: Props) => {
                         outerRadius={100}
                         paddingAngle={2}
                         dataKey="value"
-                        label={({ name, percentage }) => `${name}: ${percentage}%`}
+                        label={({ name, percent = 0 }) => `${name}: ${(percent * 100).toFixed(2)}%`}
                         labelLine={false}
-                      >
-                        {data.map(({ key, color }) => (
-                          <Cell key={key} fill={color} />
-                        ))}
-                      </Pie>
+                        shape={renderPieShape}
+                      />
                       <Tooltip
-                        formatter={value => [`${value.toLocaleString()} points`, "Points"]}
+                        formatter={value => [`${value?.toLocaleString()} points`, "Points"]}
                         labelFormatter={name => name}
                       />
                       <Legend />
@@ -97,14 +107,11 @@ const DefenseChart = (props: Props) => {
                         cy="50%"
                         outerRadius={100}
                         dataKey="value"
-                        label={({ name, percentage }) => `${name}: ${percentage}%`}
-                      >
-                        {data.map(({ key, color }) => (
-                          <Cell key={key} fill={color} />
-                        ))}
-                      </Pie>
+                        label={({ name, percent = 0 }) => `${name}: ${(percent * 100).toFixed(2)}%`}
+                        shape={renderPieShape}
+                      />
                       <Tooltip
-                        formatter={value => [`${value.toLocaleString()} points`, "Points"]}
+                        formatter={value => [`${value?.toLocaleString()} points`, "Points"]}
                         labelFormatter={name => name}
                       />
                       <Legend />
@@ -119,18 +126,14 @@ const DefenseChart = (props: Props) => {
                       <XAxis type="number" />
                       <YAxis type="category" dataKey="name" />
                       <Tooltip
-                        formatter={value => [
-                          `${value.toLocaleString()} points (${data.find(item => item.value === value)?.percentage}%)`,
-                          "Points"
-                        ]}
+                        formatter={(value, name, item) => {
+                          const { percentage = "0" } = item.payload;
+                          return [`${value?.toLocaleString()} points (${percentage}%)`, "Points"];
+                        }}
                         labelFormatter={name => name}
                       />
                       <Legend />
-                      <Bar dataKey="value" name="Points" radius={[0, 4, 4, 0]}>
-                        {data.map(({ key, color }) => (
-                          <Cell key={key} fill={color} />
-                        ))}
-                      </Bar>
+                      <Bar dataKey="value" name="Points" radius={[0, 4, 4, 0]} shape={renderBarShape} />
                     </BarChart>
                   </ResponsiveContainer>
                 </TabsContent>
