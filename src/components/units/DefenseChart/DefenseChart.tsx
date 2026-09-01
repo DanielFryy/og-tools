@@ -18,7 +18,7 @@ const renderPieShape = (props: PieSectorShapeProps) => {
 };
 
 const renderBarShape = (props: BarShapeProps) => {
-  const { index, isActive, option, payload, ...rectangleProps } = props;
+  const { index, isActive, payload, ...rectangleProps } = props;
 
   return <Rectangle {...(rectangleProps as RectangleProps)} fill={getDatumColor(payload) ?? props.fill} />;
 };
