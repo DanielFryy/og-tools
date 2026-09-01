@@ -16,14 +16,14 @@ const NotFoundPage = () => {
         </div>
         <div className="space-y-3 text-center">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Page Not Found</h1>
-          <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed">
+          <p className="mx-auto max-w-150 text-muted-foreground md:text-xl/relaxed">
             It seems like you've ventured into deep space. This sector doesn't exist in our galaxy.
           </p>
         </div>
         <FallbackNavigation />
-        <div className="relative h-[300px] w-full max-w-[500px] overflow-hidden rounded-lg">
+        <div className="relative h-75 w-full max-w-125 overflow-hidden rounded-lg">
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=600')] bg-cover bg-center opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-b from-blue-900 to-slate-900 opacity-80" />
+          <div className="absolute inset-0 bg-linear-to-b from-blue-900 to-slate-900 opacity-80" />
           <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white">
             <div className="space-y-2">
               <div className="flex justify-center">
@@ -36,7 +36,7 @@ const NotFoundPage = () => {
             </div>
           </div>
           <div className="absolute bottom-0 left-0 right-0">
-            <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
+            <div className="h-px w-full bg-linear-to-r from-transparent via-blue-500 to-transparent" />
             <div className="flex justify-between p-4 text-xs text-blue-200">
               <span>Sector: Unknown</span>
               <span>Coordinates: 404.404.404</span>

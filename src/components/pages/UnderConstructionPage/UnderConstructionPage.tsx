@@ -24,7 +24,7 @@ const UnderConstructionPage = (props: Props) => {
       </div>
       <div className="flex flex-col gap-3 text-center">
         <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Under Construction</h1>
-        <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed">
+        <p className="mx-auto max-w-150 text-muted-foreground md:text-xl/relaxed">
           Our engineers are working hard to build this feature. Please check back soon.
         </p>
       </div>
@@ -33,9 +33,9 @@ const UnderConstructionPage = (props: Props) => {
         <span className="text-muted-foreground">Estimated completion: Soon™</span>
       </div>
       <FallbackNavigation />
-      <div className="relative w-full max-w-[500px] overflow-hidden rounded-lg min-h-72">
+      <div className="relative w-full max-w-125 overflow-hidden rounded-lg min-h-72">
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=600')] bg-cover bg-center opacity-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-yellow-500 to-slate-900 opacity-80" />
+        <div className="absolute inset-0 bg-linear-to-b from-yellow-500 to-slate-900 opacity-80" />
         <div className="flex flex-col text-center z-10">
           <div className="flex flex-col gap-2 px-6 pt-16 pb-4">
             <div className="flex justify-center">
@@ -46,7 +46,7 @@ const UnderConstructionPage = (props: Props) => {
               Our workers are building new features to enhance your OGame experience. Construction is in progress.
             </p>
           </div>
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-yellow-500 to-transparent" />
+          <div className="h-px w-full bg-linear-to-r from-transparent via-yellow-500 to-transparent" />
           <div className="flex justify-between p-4 text-xs text-yellow-200">
             <span>Status: In Progress</span>
             <span>Progress: Unknown</span>

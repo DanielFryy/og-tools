@@ -8,7 +8,7 @@ const BlueBox = (props: Props) => {
   return (
     <div
       className={twMerge(
-        "BlueBox relative h-[300px] w-full overflow-hidden rounded-lg bg-gradient-to-b from-blue-900 to-slate-900 p-4",
+        "BlueBox relative h-75 w-full overflow-hidden rounded-lg bg-linear-to-b from-blue-900 to-slate-900 p-4",
         className
       )}
     >

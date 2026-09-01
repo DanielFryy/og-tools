@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const ShipsPage = () => {
   return (
     <div className="ShipsPage flex flex-1 flex-col items-center h-fit min-h-full">
-      <section className="flex-1 flex flex-col items-center justify-center text-center w-full py-12 max-w-[120rem] md:py-24 lg:py-32 bg-muted/80 rounded px-4 md:px-6">
+      <section className="flex-1 flex flex-col items-center justify-center text-center w-full py-12 max-w-480 md:py-24 lg:py-32 bg-muted/80 rounded px-4 md:px-6">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Ship Calculators</h1>
           <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -23,7 +23,7 @@ const ShipsPage = () => {
           </p>
         </div>
       </section>
-      <section className="w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 gap-8 grid grid-cols-1 @4xl/main:grid-cols-2 @7xl/main:grid-cols-3 @8xl/main:grid-cols-4 justify-items-center">
+      <section className="w-full py-12 max-w-480 md:py-24 px-4 md:px-6 gap-8 grid grid-cols-1 @4xl/main:grid-cols-2 @7xl/main:grid-cols-3 @8xl/main:grid-cols-4 justify-items-center">
         <Card
           title="Manual Calculator"
           description="A flexible calculator where you can freely input ship quantities and see the total resource costs. Perfect for planning custom fleet compositions without predefined ratios."
@@ -55,7 +55,7 @@ const ShipsPage = () => {
           soon
         />
       </section>
-      <section className="flex-1 flex flex-col @4xl:flex-row gap-4 justify-evenly w-full py-12 max-w-[120rem] md:py-24 px-4 md:px-6 bg-muted/80 rounded">
+      <section className="flex-1 flex flex-col @4xl:flex-row gap-4 justify-evenly w-full py-12 max-w-480 md:py-24 px-4 md:px-6 bg-muted/80 rounded">
         <div className="flex flex-col justify-center gap-4">
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold tracking-tighter md:text-4xl">Why Use Our Ship Calculators?</h2>
